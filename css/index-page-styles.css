@@ -66,7 +66,8 @@ body {
 .btn-responsive {
 		height: 4%;
 		width: 8.25%;
-		font-size: 0.8vmax;
+		font-size: 0.85vmax;
+		text-align: center;
   }
 
 

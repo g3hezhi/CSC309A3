@@ -1,0 +1,22 @@
+{
+  "name": "exgames",
+  "version": "1.0.0",
+  "description": "working with suman, victor ,Seung",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g3hezhi/CSC309A3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/g3hezhi/CSC309A3/issues"
+  },
+  "homepage": "https://github.com/g3hezhi/CSC309A3#readme",
+  "dependencies": {
+    "express": "^4.13.1"
+  }
+}

@@ -19,6 +19,8 @@ function handleSubmit(){
 
 	// send username and password securely to the server
 	$.post(url, idpwd, function(data, status) {
+		
+		// display data sent from the server
 		console.log(data);
 		//alert("success");
 	});

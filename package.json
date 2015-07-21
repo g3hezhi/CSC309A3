@@ -18,6 +18,10 @@
   "homepage": "https://github.com/g3hezhi/CSC309A3#readme",
   "dependencies": {
     "express": "^4.13.1",
-    "mongodb": "~2.0.33"
+    "mongodb": "~2.0.33",
+    "monk": "~1.0.1"
+
+  
+    
   }
 }

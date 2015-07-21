@@ -31,12 +31,22 @@ body {
     overflow: hidden;
 }
 
+.posting-caption{
+	height: 130px;
+    overflow: auto;
+}
+
 .caption h4 {
     white-space: nowrap;
 }
 
+.posting-caption h4, p{
+	padding-left: 10px;
+}
+
 .thumbnail img {
     width: 100%;
+	height: 20%;
 }
 
 .ratings {
@@ -52,6 +62,17 @@ body {
 .thumbnail .caption-full {
     padding: 9px;
     color: #333;
+}
+
+.comment{
+	padding: 2px;
+	color: #333;
+	display: block;
+	padding: 4px;
+	margin-bottom: 20px;
+	line-height: 1.42857143;
+	background-color: #fff;
+
 }
 
 .col-xs-searchbar{
@@ -78,5 +99,35 @@ body {
  .media-icons{
 	padding: 10px;
  }
+ 
+.customer {
+	padding-bottom 15px;
+}
+	
+.customer-posting{
+	color: #333;
+	height: 35%;
+	width: 100%;
+}
+
+.mytext{
+	width: 100%;
+	height: 64%;
+	padding: 10px;
+}
+
+.mybutton{
+	width: 150px;
+	height: 40px;
+}
+
+.seller-thumbnail {
+  display: block;
+  padding: 4px;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: #fff;
+
+}
 
 

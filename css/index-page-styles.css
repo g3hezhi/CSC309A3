@@ -32,7 +32,7 @@ body {
 }
 
 .posting-caption{
-	height: 130px;
+	height: 300px;
     overflow: auto;
 }
 
@@ -76,12 +76,12 @@ body {
 }
 
 .col-xs-searchbar{
-  position: relative;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
-  float: left;
-  width: 91.6%;
+	position: relative;
+	min-height: 1px;
+	padding-right: 15px;
+	padding-left: 15px;
+	float: left;
+	width: 91.6%;
 }
   
 .btn-responsive {
@@ -121,13 +121,49 @@ body {
 	height: 40px;
 }
 
-.seller-thumbnail {
-  display: block;
+.seller-profile {
+  display: inline-block;
   padding: 4px;
+  width: 25%;
   margin-bottom: 20px;
   line-height: 1.42857143;
   background-color: #fff;
-
 }
 
+.seller-product {
+  display: inline-block;
+  padding: 4px;
+  width: 70%;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: #fff;
+}
 
+.seller-product p{
+	padding-right: 2px;
+}
+
+.seller-profile p{
+	padding-right: 2px;
+}
+
+.product-listing{
+	display: inline-block;
+	padding: 4px;
+	margin-bottom: 20px;
+	line-height: 1.42857143;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	width: 100%;
+	height: 100%;
+}
+
+.product-info-left{
+	width: 70%;
+	height: 100%;
+}
+
+.product-info-right{
+	width: 25%;
+	height: 100%;
+}

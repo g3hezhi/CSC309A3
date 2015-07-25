@@ -18,7 +18,8 @@
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
-    
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="389626825637-ac0g5af84tsa8msfgdm7rs4gq4uba503.apps.googleusercontent.com">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -67,8 +68,10 @@
     </nav>
 	
   <div class="container">
+  <br> <!-- TODO need to be fixed (h2 login is behind the header) -->
   <h2>Login</h2>
   </br>
+  
 	  <form role="form">
  			<div class="form-group">	
 				<label for="email">Username (Email):</label>
@@ -84,6 +87,9 @@
 			<button type="button" class="btn btn-primary" id="b_submit">Submit</button>
 	  </form>
 </div>
+<!-- THIS GOOGLE LOGIN BUTTON APPEARS ONLY WHEN LOGIN.HTML IS RUNNING ON A SERVER-->
+<div class="g-signin2" data-onsuccess="onSignIn">signin</div>
+<button onclick="signOut();">Sign Out TEST</button>
 
     <footer class="footer">
         <div class="container">

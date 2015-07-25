@@ -1,0 +1,15 @@
+Implementation Ideas
+
+#1	Register
+login with Google
+only after Google sign in, user can create a profile?
+edit profile, post: only after entering password?
+
+#2	Login Cookie
+login request to server
+server checks password
+server sends cookie to the browser
+cookie only keeps the userid value on the user's machine
+keep this cookie in the browser until the user closes it
+This cookie contains userid
+

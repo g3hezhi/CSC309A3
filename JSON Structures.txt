@@ -1,0 +1,28 @@
+Structures for different JSON objects
+
+User Profile:
+
+{
+	"first" : "zhi",
+	"last" : "hu",
+	"username" : "jkljlk",
+	"passwod" : "pwd",
+	"email" : "test@email.com",
+	"isSuspended" : "false",
+	"credibility" : {1,2,3},	
+	"posts": 
+		{
+
+		}
+}
+
+
+Post:
+{
+	"user" : "id",
+	"description" : "text",
+	"comment": "text",
+	"price" : "#",
+	"exchange" : "what does this exchange mean?"
+
+}

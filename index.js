@@ -1,22 +1,29 @@
 // SERVER
 
+// Variables
+var portNum = 3000;
+
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 
 var mongodb = require('mongodb');
 var monk = require('monk');
 // var db = monk('localhost:27017/CSC309A3');
 var mongoClient = mongodb.MongoClient;
 var mongourl = 'mongodb://localhost:27017/CSC309A3';
+
 var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
+
 /*	
 var routes = require('./routes/index');
 var users = require('.routes/users');
 */
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 // Make our db accessible to our router
 /*app.use(function(req,res,next){
     req.db = db;
@@ -55,7 +62,25 @@ db.mycol.remove() remove all tuples
 db.mycol.find({},{"title":1,_id:0}) 1: show 0: hide
 */
 
-// handle post request
+/*
+
+*/
+app.use(function (req, res, next) {
+	// set cookies
+ 	// check if client sent cookie
+
+ 	// console.log(req.cookies);
+
+
+	next();
+});
+
+
+/*
+******** HANDLE POST REQUEST
+*/
+
+// handle post request for login
 app.post('/login',function (req, res) {
 	console.log("LOGIN POST");
 	
@@ -63,36 +88,111 @@ app.post('/login',function (req, res) {
 	console.log(req.body.id);
 	console.log(req.body.pwd);
 
+  	var cookie = req.cookies.mycookie;
+  	if( cookie === undefined) {
+  		console.log('COOKIE DNE');
+
+		//create a new cookie  		
+		// res.append('Set-Cookie', 'test=testValue');
+		// res.append('Set-Cookie', 'foo=bar; Path=/; HttpOnly');
+  		// res.cookie('test', 'testValue');
+  		
+  		
+  		res.cookie('mycookie', 'test', {secure: false, maxAge: 900000, httpOnly: true});
+  		
+  		/*
+		res.writeHead(200, {
+		'Set-Cookie': 'mycookie=test',
+		'Content-Type': 'text/plain'
+		});
+*/
+		//res.send();
+		//res.end('Cookie has been set.\n');
+		//res.setHeader('Access-Control-Allow-Origin', '*');
+		
+
+  	}
+	else {
+		// yes, cookie was already present 
+		console.log('cookie exists', cookie);
+	} 
 
 	/* check database if username and password match */
 	// Use connect method to connect to the Server
+
 	mongoClient.connect(mongourl, function (err, db) {
 		assert.equal(null, err);
 		/*
 		insertDocument(db, function() {
 		    db.close();
 		});
-		*/
+		
 		findUsers(db, function() {
 		    db.close();
 		});
-
+		*/
 	});
 
 	// send response to the client
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.send("response to login post request from server");
+	//res.setHeader('Access-Control-Allow-Origin', '*');
+	// res.send("response to login post request from server");
 	// res.send("success or fail");
+	res.send();
 });
 
 
-var server = app.listen(3000, function () {
+var server = app.listen(portNum, function () {
   	var host = server.address().address;
   	var port = server.address().port;
 
   	console.log('Example app listening at http://%s:%s', host, port);
 });
 
+// handle post request for user registration
+app.post('/register',function (req, res) {
+
+});
+
+// handle post request for creating a post(ad)
+app.post('/post',function (req, res) {
+
+});
+
+
+// handle post request for sending a message 
+app.post('/msg',function (req, res) { 
+
+});
+
+/*
+******** HANDLE GET REQUEST
+*/
+
+
+// handle get request for a specific user profile
+app.get('/getProfile',function (req, res) { 
+});
+
+// handle get request for a specific post
+app.get('/getPost',function (req, res) { 
+});
+
+// handle get request for a list of posts
+app.get('/getPostList',function (req, res) { 
+
+});
+
+// handle get request for a message from a different user
+app.get('/getMsg',function (req, res) { 
+
+});
+
+
+/*
+********	HELPER FUNCTIONS
+*/
+
+// insert a row(tuple/document) into the database
 var insertDocument = function(db, callback) {
    db.collection('users').insertOne( {
 
@@ -110,6 +210,7 @@ var insertDocument = function(db, callback) {
   });
 };
 
+// retrieve a row(tuple/document) from the database
 var findUsers = function(db, callback) {
    var cursor =db.collection('users').find( );
    cursor.each(function(err, doc) {

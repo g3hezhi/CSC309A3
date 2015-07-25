@@ -4,7 +4,9 @@ var b_submit = document.getElementById("b_submit");
 var f_email = document.getElementById("email"); 
 var f_password = document.getElementById("pwd"); 
 
-var url = "http://127.0.0.1:3000/login";
+// node server url
+// var url = "http://127.0.0.1:3000/login";
+var url = "http://localhost:3000/login";
 // console.log(b_submit);
 // console.log("TOP LOGIN.JS");
 
@@ -17,13 +19,30 @@ function handleSubmit(){
 	};	
 	// console.log(idpwd);
 
-	// send username and password securely to the server
+	// send username and password securely to the node server
 	$.post(url, idpwd, function(data, status) {
 		
 		// display data sent from the server
-		console.log(data);
+		console.log("data from server = " + data);
 		//alert("success");
 	});
 
 
+}
+
+// executed when a user logs in
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+}
+
+// attach to the sign out button
+function signOut() {
+	var auth2 = gapi.auth2.getAuthInstance();
+	auth2.signOut().then(function () {
+	  console.log('User signed out.');
+	});
 }

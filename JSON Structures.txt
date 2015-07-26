@@ -14,15 +14,25 @@ User Profile:
 		{
 
 		}
+	"messages":
+		{
+		}
 }
 
 
 Post:
 {
-	"user" : "id",
+	
 	"description" : "text",
 	"comment": "text",
 	"price" : "#",
-	"exchange" : "what does this exchange mean?"
+	"exchange" : "does user want to exchange his product with different games?"
 
+}
+
+Message:
+{
+	"from" : "username"
+	"to"   :  "username"
+	"message": "text"
 }

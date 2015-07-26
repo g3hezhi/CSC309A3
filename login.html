@@ -77,7 +77,7 @@
   <h2>Login</h2>
   </br>
   
-	  <form role="form">
+	  <form id="sign-in" role="form">
  			<div class="form-group">	
 				<label for="email">Email:</label>
 				<input type="email" class="form-control" id="email" placeholder="Enter username" >
@@ -86,10 +86,15 @@
 				<label for="pwd">Password:</label>
 				<input type="password" class="form-control" id="pwd" placeholder="Enter password" >
 			</div>
+<<<<<<< HEAD
 			<div class="checkbox">
 				<label><input type="checkbox">Remember me</label>
 			</div>
 			<button type="button" class="btn btn-primary" id="b_submit">Submit</button>
+=======
+			<button type="button" class="btn btn-primary" id="b_submit" onclick="submit(document.getElementById('sign-in').value)">Login</button>
+            <script src="js/register.js"></script>
+>>>>>>> 12ada1b7baaf98a79329ae19279061f5b35f52f5
 			<a href="register.html" type="button" class="btn btn-primary">Register</a>
 	  </form>
 	</div>

@@ -13,7 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/sticky-footer.css" rel="stylesheet">
+    <link href="css/sticky-footer.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/index-page-styles.css" rel="stylesheet">
@@ -24,6 +24,22 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<style>
+		#contactHeader{
+			border-radius: 4px;
+			background-color: #7EB3CD;
+			padding-left:2%;
+		}
+		#contact-info{
+			border-radius: 4px;
+			background-color:#E0E0E0 ;
+			margin-top:4%;
+			padding-left:2%;
+		}
+		#contact-info p{
+			margin-bottom:2%;
+		}
+	</style>
 
 </head>
 
@@ -66,10 +82,9 @@
         <!-- /.container -->
     </nav>
 	
-    <!-- Page Content -->
-    <div class="container">	
-        <div class="row">
-            <div class="col-md-3">
+	<div class="container">
+		<div class="row">
+		     <div class="col-md-3">
 				<img class="logo" src="http://placehold.it/320x150" alt="">
 				
 				<div class="row-fluid social-media">
@@ -89,55 +104,19 @@
 					<a href="#" class="list-group-item">Legacy Consoles</a>
                 </div>	
 			</div>
-
-            <div class="col-md-9">
-				<form>
-					<div class="col-xs-searchbar">
-						<input type="text" class="form-control" id="search" placeholder="What are you looking for?">
+			<div class="col-md-9">
+				<h1 id="contactHeader"><small>Contact</small></h1>
+				<div id="contact-info">
+						<p>Address: </p>
+						<p>phone: </p>
+						<p>Email: </p>
+						<p>opening time: </p>						
 					</div>
-					<button type="submit" class="btn btn-primary btn-responsive">Search</button>
-				</form>       
-
-                <div class="row">
-                    <div class="col-sm-12 col-lg-12 col-md-12">
-						<div class="seller-profile">
-							<div class="posting-caption">
-								<h4><a href="#">Seller Name</a></h4>
-								<p>Seller Information And Rating</p>
-								<p>Seller Information And Rating</p>
-								<p>Seller Information And Rating</p>
-							</div>			
-						</div>
-						<div class="seller-product">
-							<div class="posting-caption">
-								<h4><a href="#">Product</a></h4>
-								<p>Product Information And Rating</p>
-								<p>Product Information And Rating</p>
-								<p>Product Information And Rating</p>
-								<p>Product Information And Rating</p>
-								<p>Product Information And Rating</p>
-								<p>Product Information And Rating</p>
-							</div>			
-						</div>
-						
-						
-						<div class="customer-posting">
-							<div class="comment">
-								<form>
-									 If you are interested, please leave a reply!<br>
-									 <input type="text" name='comment' id='comment' class="mytext"></input><br>
-									 <input type='submit' value='Submit' class="mybutton"></input>  
-								</form>
-							</div>
-						</div>	
-                    </div>	
-                </div>
-            </div>
-        </div>
-    </div>
-	
-
-<footer class="footer">
+			</div>
+		
+	</div>
+	</div>
+	<footer class="footer">
       <div class="container">
         <p class="text-muted">Copyright &copy; 2015 - All Rights Reserved - EXgames</p>
       </div>
@@ -148,7 +127,4 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+	</body>

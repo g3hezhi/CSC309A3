@@ -78,27 +78,22 @@
     <div class="container">	
         <div class="row">
 	
-            <div class="col-md-12" id="register-context">
-				<form class="col-md-4 col-md-offset-4" >
+            <div class="col-md-12" >
+				<form id="register-context" class="col-md-4 col-md-offset-4" >
 					<input type="text" name='userName' id='userName' class="mytext" placeholder="User Name"></input><br><br>
-				</form>
-				<form class="col-md-4 col-md-offset-4" >
 					<input type="text" name='passWord' id='passWord' class="mytext" placeholder="Passwrod"></input><br><br>
-				</form>
-				<form class="col-md-4 col-md-offset-4" >
 					<input type="text" name='emailAddress' id='emailAddress' class="mytext" placeholder="Email Address"></input><br><br>
-				</form>
-				<form class="col-md-4 col-md-offset-4" >
 					<input type="text" name='cellPhone' id='cellPhone' class="mytext" placeholder="Cell Phone(optional)"></input><br><br>
-					<button type="button" class="btn btn-primary btn-lg btn-block">Register</button>
+					<button type="button" onclick="submit(document.getElementById('register-context').value)" class="btn btn-primary btn-lg btn-block">Register</button>
 				</form>
-				
 				
 			</div>
 		</div>
 	</div>
+    <script src="js/jquery.js"></script>
+    <script src="js/register.js"></script>
 </body>
-			
+</html>
 			
 			
 			

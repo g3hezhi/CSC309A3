@@ -24,12 +24,6 @@ var users = require('.routes/users');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// Make our db accessible to our router
-/*app.use(function(req,res,next){
-    req.db = db;
-    next();
-});
-*/
 // https://codeforgeek.com/2014/09/handle-get-post-request-express-4/
 // http://code.tutsplus.com/tutorials/getting-started-with-mongodb-part-1--net-22879
 
@@ -61,19 +55,13 @@ db.COLLECTION_NAME.remove(DELETION_CRITERIA,1) remove one tuple
 db.mycol.remove() remove all tuples
 db.mycol.find({},{"title":1,_id:0}) 1: show 0: hide
 */
+var server = app.listen(portNum, function () {
+  	var host = server.address().address;
+  	var port = server.address().port;
 
-/*
-
-*/
-app.use(function (req, res, next) {
-	// set cookies
- 	// check if client sent cookie
-
- 	// console.log(req.cookies);
-
-
-	next();
+  	console.log('Example app listening at http://%s:%s', host, port);
 });
+
 
 
 /*
@@ -88,35 +76,6 @@ app.post('/login',function (req, res) {
 	console.log(req.body.id);
 	console.log(req.body.pwd);
 
-  	var cookie = req.cookies.mycookie;
-  	if( cookie === undefined) {
-  		console.log('COOKIE DNE');
-
-		//create a new cookie  		
-		// res.append('Set-Cookie', 'test=testValue');
-		// res.append('Set-Cookie', 'foo=bar; Path=/; HttpOnly');
-  		// res.cookie('test', 'testValue');
-  		
-  		
-  		res.cookie('mycookie', 'test', {secure: false, maxAge: 900000, httpOnly: true});
-  		
-  		/*
-		res.writeHead(200, {
-		'Set-Cookie': 'mycookie=test',
-		'Content-Type': 'text/plain'
-		});
-*/
-		//res.send();
-		//res.end('Cookie has been set.\n');
-		//res.setHeader('Access-Control-Allow-Origin', '*');
-		
-
-  	}
-	else {
-		// yes, cookie was already present 
-		console.log('cookie exists', cookie);
-	} 
-
 	/* check database if username and password match */
 	// Use connect method to connect to the Server
 
@@ -126,27 +85,20 @@ app.post('/login',function (req, res) {
 		insertDocument(db, function() {
 		    db.close();
 		});
-		
+		*/
 		findUsers(db, function() {
 		    db.close();
 		});
-		*/
+		
 	});
 
-	// send response to the client
+	
 	//res.setHeader('Access-Control-Allow-Origin', '*');
-	// res.send("response to login post request from server");
-	// res.send("success or fail");
-	res.send();
+	res.send("response to login post request from server");
+
 });
 
 
-var server = app.listen(portNum, function () {
-  	var host = server.address().address;
-  	var port = server.address().port;
-
-  	console.log('Example app listening at http://%s:%s', host, port);
-});
 
 // handle post request for user registration
 app.post('/register',function (req, res) {

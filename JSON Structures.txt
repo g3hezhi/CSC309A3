@@ -32,7 +32,9 @@ Post:
 
 Message:
 {
-	"from" : "username"
-	"to"   :  "username"
-	"message": "text"
+	"from" : "username",
+	"to"   :  "username",
+	"isRead": "T/F",
+	"message": "text",
+	"time": "time";
 }

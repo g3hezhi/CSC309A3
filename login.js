@@ -24,6 +24,7 @@ function handleSubmit(){
 		
 		// display data sent from the server
 		console.log("data from server = " + data);
+		// document.cookie="username=John Doe";
 		//alert("success");
 	});
 

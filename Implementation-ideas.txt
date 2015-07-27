@@ -13,3 +13,6 @@ cookie only keeps the userid value on the user's machine
 keep this cookie in the browser until the user closes it
 This cookie contains userid
 
+#3 Security
+Might I suggest salting and hashing passwords with for example bcrypt, and using mongojs instead of mongoose?
+

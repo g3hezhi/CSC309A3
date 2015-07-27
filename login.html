@@ -77,37 +77,33 @@
   <h2>Login</h2>
   </br>
   
-	  <form id="sign-in" role="form">
+	  <form id="sign-in" role="form" action="/login" method="post">
  			<div class="form-group">	
 				<label for="email">Email:</label>
-				<input type="email" class="form-control" id="email" placeholder="Enter username" >
+				<input type="text" class="form-control"  placeholder="Enter username" name = "email">
 			</div>
 			<div class="form-group">
 				<label for="pwd">Password:</label>
-				<input type="password" class="form-control" id="pwd" placeholder="Enter password" >
+				<input type="password" class="form-control" name="password" placeholder="Enter password" >
 			</div>
-<<<<<<< HEAD
+
 			<div class="checkbox">
 				<label><input type="checkbox">Remember me</label>
 			</div>
-			<button type="button" class="btn btn-primary" id="b_submit">Submit</button>
-=======
-			<button type="button" class="btn btn-primary" id="b_submit" onclick="submit(document.getElementById('sign-in').value)">Login</button>
+			<button type="submit" class="btn btn-primary" id="b_submit">Submit</button>
+
             <script src="js/register.js"></script>
->>>>>>> 12ada1b7baaf98a79329ae19279061f5b35f52f5
+
 			<a href="register.html" type="button" class="btn btn-primary">Register</a>
 	  </form>
 	</div>
-<!-- THIS GOOGLE LOGIN BUTTON APPEARS ONLY WHEN LOGIN.HTML IS RUNNING ON A SERVER-->
-<div class="g-signin2" data-onsuccess="onSignIn">signin</div>
-<button onclick="signOut();">Sign Out TEST</button>
 
     <footer class="footer">
         <div class="container">
             <p class="text-muted">Copyright &copy; 2015 - All Rights Reserved - EXgames</p>
         </div>
     </footer>
-    <script src="login.js" type="text/javascript" charset="utf-8"></script> 
+    <!-- <script src="login.js" type="text/javascript" charset="utf-8"></script>  -->
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 Structures for different JSON objects
 
-User Profile:
+User :
 
 {
 	"first" : "zhi",

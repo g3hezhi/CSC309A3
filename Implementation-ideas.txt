@@ -16,3 +16,6 @@ This cookie contains userid
 #3 Security
 Might I suggest salting and hashing passwords with for example bcrypt, and using mongojs instead of mongoose?
 
+#4 performance
+http://docs.mongodb.org/manual/indexes/
+Indexes provide high performance read operations for frequently used queries.

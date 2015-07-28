@@ -1,7 +1,13 @@
 // app/routes.js
 var express = require('express');
 var app      = express();
+var mongodb = require('mongodb');
 
+var User            = require('../app/models/user');
+var Post            = require('../app/models/post');
+var Message         = require('../app/models/message');
+
+var mongoClient = mongodb.MongoClient;
 module.exports = function(app, passport) {
 
     // =====================================
@@ -50,7 +56,7 @@ module.exports = function(app, passport) {
 
 
     // =====================================
-    // PROFILE SECTION =====================
+    // PROFILE =====================
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
@@ -68,6 +74,49 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 
+    // =====================================
+    // POSTING ===============================
+    // =====================================
+    // show the post form
+    app.get('/post', function(req, res) {        
+        // render the page and pass in any flash data if it exists
+        res.render('posting.ejs'); 
+    });
+
+    // process the post form
+    app.post('/post', function(req, res) {
+        // get input from user
+/*
+        console.log(req.body.category);
+        console.log(req.body.item);
+        console.log(req.body.topic);
+        console.log(req.body.comment);
+*/
+        var category = req.body.category;
+        var item = req.body.item;
+        var topic = req.body.topic;
+        var comment = req.body.comment;
+
+        // save in the post collection(table)
+        var newPost = new Post({category: category, topic: topic, comment: comment});
+        newPost.save(function(err, newPost) {
+            if (err) return console.error(err);
+            else {
+                console.log("post save success");
+            }
+        });
+
+
+        
+        // update the user data in the USER COLLECTION
+
+
+
+
+        // alert the user on success and redirect
+        res.render('index.ejs'); // load the index.ejs file
+    });
+
 
 };
 
@@ -81,3 +130,17 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
+
+// insert a row(tuple/document) into the 'post' collection
+var insertPost = function(db, callback) {
+   db.collection('posts').insertOne( {
+
+        "writer"       : "some1", // user?? or objectid?
+        "description"  : "something"
+
+   }, function(err, result) {
+    //assert.equal(err, null);
+    console.log("Inserted a document into the 'posts' collection.");
+    
+  });
+};

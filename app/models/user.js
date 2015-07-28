@@ -7,54 +7,8 @@ Mongoose automatically looks for the plural version of your model name.
 // load the things we need
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
-
-
-    // =========================================================================
-    // POST ============================================================
-    // =========================================================================
-
-var postSchema = mongoose.Schema({
-
-    post             : {
-        writer       : String, // user?? or objectid?
-        description  : String,
-        comment      : String,
-        price        : Number,
-        exchange     : String,
-        time         : Date
-    }
-
-});
-
-
-
-// create the model for users and expose it to our app
-module.exports = mongoose.model('Post', postSchema);
-
-
-    // =========================================================================
-    // MESSAGE ============================================================
-    // =========================================================================
-
-// define the schema for our user model
-var messageSchema = mongoose.Schema({
-
-    message             : {
-        from         : String, //user ?? or objectid?
-        to           : String, //user??
-        isRead       : Boolean,
-        content      : String,
-        time         : Date     // date: { type: Date, default: Date.now },
-    }
-
-});
-
-// http://mongoosejs.com/docs/subdocs.html
-
-// create the model for users and expose it to our app
-module.exports = mongoose.model('Message', messageSchema);
-
-
+var p     = require('./post');
+var m  = require('./message');
 
     // =========================================================================
     // USER ============================================================
@@ -63,8 +17,9 @@ module.exports = mongoose.model('Message', messageSchema);
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-// UNFINISHED
+// MAKE ADJUSTMENT
 // TODO FIND OUT HOW TO RELATE USER AND HIS/HER POST/MSG
+// http://mongoosejs.com/docs/populate.html 
     local            : {
         email        : String,
         password     : String,
@@ -81,13 +36,32 @@ var userSchema = mongoose.Schema({
         email        : String,
         name         : String
     },
-    posts            : {
-        post         : [postSchema]
-    },
+
     messages         : {
-        message      : [messageSchema]
+        message      : [Object]
+    },
+
+
+    posts            : {
+        post         : [Object] // array of posts
     }
 
+
+/*
+    posts            : {
+        post         : [{
+            writer       : String, // user?? or objectid?
+            description  : String,
+            category     : String,
+            type         : String,  //console/game/other
+            topic        : String,
+            comment      : String,
+            price        : Number,
+            exchange     : String,
+            time         : {type: Date, default: Date.now }
+        }]
+    }
+*/
 
 
 // http://mongoosejs.com/docs/guide.html
@@ -108,4 +82,3 @@ userSchema.methods.validPassword = function(password) {
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);
-

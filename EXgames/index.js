@@ -144,7 +144,7 @@ app.get('/getMsg',function (req, res) {
 ********	HELPER FUNCTIONS
 */
 
-// insert a row(tuple/document) into the database
+// insert a row(tuple/document) into the 'users' collection
 var insertDocument = function(db, callback) {
    db.collection('users').insertOne( {
 

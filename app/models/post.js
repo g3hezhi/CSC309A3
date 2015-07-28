@@ -1,23 +1,24 @@
 // app/models/post.js
 // load the things we need
 var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
+
 
 // define the schema for our user model
 var postSchema = mongoose.Schema({
-
-    post             : {
-        writer       : String, // user??
+    
+	    writer       : String, // user?? or objectid?
         description  : String,
+        category     : String,
+        type         : String,  //console/game/other
+        topic        : String,
         comment      : String,
         price        : Number,
         exchange     : String,
-        time         : Date
-    }
-
+        time         : {type: Date, default: Date.now }
+    
 });
 
 
 
-// create the model for users and expose it to our app
+// create the model for posts and expose it to our app
 module.exports = mongoose.model('Post', postSchema);

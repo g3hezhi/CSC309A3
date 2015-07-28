@@ -1,17 +1,17 @@
 // app/models/message.js
 // load the things we need
 var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
+
 
 // define the schema for our user model
 var messageSchema = mongoose.Schema({
 
     message             : {
-        from         : String, //user ??
+        from         : String, //user ?? or objectid?
         to           : String, //user??
-        isRead       : boolean,
+        isRead       : Boolean,
         content      : String,
-        time         : Date 	// date: { type: Date, default: Date.now },
+        time         : Date     // date: { type: Date, default: Date.now },
     }
 
 });

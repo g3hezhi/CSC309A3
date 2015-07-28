@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 
 // define the schema for our user model
-var msgSchema = mongoose.Schema({
+var messageSchema = mongoose.Schema({
 
     message             : {
         from         : String, //user ??
@@ -19,4 +19,4 @@ var msgSchema = mongoose.Schema({
 // http://mongoosejs.com/docs/subdocs.html
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('Message', msgSchema);
+module.exports = mongoose.model('Message', messageSchema);

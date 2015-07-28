@@ -18,7 +18,8 @@ module.exports = function(app, passport) {
         res.render('index.ejs'); // load the index.ejs file
     });
 
-
+    //direct express to locate cssfiles 
+    app.use(express.static(__dirname + '/public'));
     // =====================================
     // LOGIN ===============================
     // =====================================

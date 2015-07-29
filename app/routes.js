@@ -17,17 +17,12 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         res.render('index.ejs'); // load the index.ejs file
     });
-<<<<<<< HEAD
-	app.get('/contact', function(req, res) {
-        res.render('contact.ejs'); // load the index.ejs file
 
-=======
 	 app.get('/contact', function(req, res) {
         res.render('contact.ejs'); // load the contact.ejs file
     });
 	app.get('/posting', function(req, res) {
         res.render('posting.ejs'); // load the posting.ejs file
->>>>>>> origin/master
     });
 
     //direct express to locate cssfiles 

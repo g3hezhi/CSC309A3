@@ -70,6 +70,7 @@ module.exports = function(app, passport) {
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile.ejs', {
             user : req.user // get the user out of session and pass to template
+                        
         });
     });
 	
@@ -160,14 +161,7 @@ module.exports = function(app, passport) {
                 console.log("post save success");
             }
         });
-
-
-        
         // update the user data in the USER COLLECTION
-
-
-
-
         // alert the user on success and redirect
         res.render('index.ejs'); // load the index.ejs file
     });

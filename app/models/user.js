@@ -21,8 +21,12 @@ var userSchema = mongoose.Schema({
 // TODO FIND OUT HOW TO RELATE USER AND HIS/HER POST/MSG
 // http://mongoosejs.com/docs/populate.html 
     local            : {
-        email        : String,
+        email        : {type: String, unique: true},
+        username     : {type: String, unqiue: true},
         password     : String,
+        first        : String,
+        last         : String,
+        age          : String
     },
     facebook         : {
         id           : String,

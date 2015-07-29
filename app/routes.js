@@ -17,6 +17,7 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         res.render('index.ejs'); // load the index.ejs file
     });
+
 	 app.get('/contact', function(req, res) {
         res.render('contact.ejs'); // load the contact.ejs file
     });

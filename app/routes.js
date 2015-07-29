@@ -18,7 +18,10 @@ module.exports = function(app, passport) {
         res.render('index.ejs'); // load the index.ejs file
     });
 	 app.get('/contact', function(req, res) {
-        res.render('contact.ejs'); // load the index.ejs file
+        res.render('contact.ejs'); // load the contact.ejs file
+    });
+	app.get('/posting', function(req, res) {
+        res.render('posting.ejs'); // load the posting.ejs file
     });
 
     //direct express to locate cssfiles 

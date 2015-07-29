@@ -16,10 +16,7 @@
     <link href="css/sticky-footer.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="389626825637-ac0g5af84tsa8msfgdm7rs4gq4uba503.apps.googleusercontent.com">
+    <link href="css/index-page-styles.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,7 +28,6 @@
 </head>
 
 <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -47,7 +43,7 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                 <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
                     <li>
                         <a href="/about">About</a>
                     </li>
@@ -69,44 +65,37 @@
         </div>
         <!-- /.container -->
     </nav>
-    
-  <div class="container">
-  <br> 
-  </br>
-  <br> <!-- TODO need to be fixed (h2 login is behind the header) -->
-  <h2>Login</h2>
-  </br>
-      <!-- show any messages that come back with authentication -->
-    <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-    <% } %>
-
-      <form id="sign-in" role="form" action="/login" method="post">
-            <div class="form-group">    
-                <label for="email">Email:</label>
-                <input type="text" class="form-control"  placeholder="Enter username" name = "email">
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" name="password" placeholder="Enter password" >
-            </div>
-
-            <div class="checkbox">
-                <label><input type="checkbox">Remember me</label>
-            </div>
-            <button type="submit" class="btn btn-primary" id="b_submit">Login</button>
-			<a href="/register" class="btn btn-primary">Register</a>
-
-            <script src="js/register.js"></script>
-      </form>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p class="text-muted">Copyright &copy; 2015 - All Rights Reserved - EXgames</p>
-        </div>
+	
+	<div class="container">
+		<div class="row">
+			<h2>Who we are</h2><br>
+			<div class="contact-info">
+				<p>We are a small start up of 4 students from the University of Toronto out to make the lives of gamers and collectors easier.</p>
+			</div>
+			
+			<h2>What we do</h2><br>
+			<div class="contact-info">
+				<p>We provide a platform for users to both buy and sell their used games, console, or gaming accessories. Post a product to sell,
+				and users will be able to peruse all available postings by category. Users are also able use our messaging system
+				for quick and reliable meetings.</p>
+			</div>
+			
+			<h2>Feedback</h2>
+			<div class="contact-info">
+				<p>If you would like to leave us a message, head over to the <a href="/contact">contact</a> page and write to us!</p>
+			</div>
+		</div>
+	</div>
+	
+	<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Copyright &copy; 2015 - All Rights Reserved - EXgames</p>
+      </div>
     </footer>
-    <!-- <script src="login.js" type="text/javascript" charset="utf-8"></script>  -->
-</body>
 
-</html>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	</body>

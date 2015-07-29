@@ -39,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">EXgames</a>
+                <a class="navbar-brand" href="/">Exgames</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -65,49 +65,57 @@
         </div>
         <!-- /.container -->
     </nav>
-	
-	<div class="container">
-		<div class="row">
-			<h2>Get in touch</h2><br>
-			<div class="contact-info">
-				<p>Phone: 905-888-8888</p>
-				<p>Email: mail@EXgames.com</p>
-				<p>Address: 123 Rainbow Street<br>
-				   Office 305, L4C1M5, Toronto ON
-				 </p>				
-				<br>
-				<p>Follow us on EXgames social media</p>
-				<a class="media-icons" target="_blank" title="follow me on Twitter" href="http://www.twitter.com"><img alt="follow me on Twitter" src="images/twitter.png" border=0></a>
-				<a class="media-icons" target="_blank" title="follow me on Facebook" href="http://www.facebook.com"><img alt="follow me on Facebook" src="images/facebook.png" border=0></a>
-				<br><br>
-				
-				<h4>If you would like to leave us a message, feel free to fill in the form below.</h4><br>
-				<form role="form">
+    
+    <!-- Page Content -->
+    <div class="container"> 
+        <div class="row">
+            <div class="col-md-3">      
+                <p class="lead">Hello username</p>
+				<img class="logo" src="images/default_profile.png" alt="">
+                <div class="list-group">
+					<a href="/profile" class="list-group-item">Profile</a>
+                    <a href="/account_edit" class="list-group-item">Edit Account</a>
+					<a href="/userinfo_edit" class="list-group-item">Edit Personal Information</a>
+                    <a href="#" class="list-group-item">My Posts</a>
+                    <a href="#" class="list-group-item">Inbox</a>
+                </div>  
+            </div>
+            <div class="col-md-8 col-md-offset-1 response-box">
+                <form role="form" action="/profile" method="post">
+                    <div class="form-group">    
+                        <label for="fname">First Name</label>
+                        <input type="text" class="form-control" id="fname">
+                    </div>
+                    <div class="form-group">    
+                        <label for="surname">Surname</label>
+                        <input type="text" class="form-control" id="surname">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Gender</label>
+                        <select class="form-control" id="gender" name="item">
+							<option></option>
+							<option>Male</option>
+							<option>Female</option>
+						</select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Preferred Locations</label>
+                        <input type="text" class="form-control" id="locations">
+                    </div>
 					<div class="form-group">
-						<label for="contact-name">Name</label>
-						<input type="text" class="form-control" id="contact-name">
-					</div>
-					<div class="form-group">
-						<label for="contact-email">Email</label>
-						<input type="email" class="form-control" id="contact-email">
-					</div>
-					<div class="form-group">
-						<label for="contact-subject">Subject</label>
-						<input type="text" class="form-control" id="contact-subject">
-					</div>
-					<div class="form-group">
-						<label for="contact-comment">Comment</label>
-						<textarea type="text" class="form-control" id="contact-comment" placeholder="Write your comment"></textarea>
-					</div>
-				  <button type="submit" class="btn btn-default">Submit</button>
-				</form>
-			</div>
-		</div>
-	</div>
-	
+                        <label for="phone">Phone Number</label>
+                        <input type="number" class="form-control" id="phone">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="b_submit">Submit</button>
+              </form>
+            </div>
+        </div>  
+    </div>
+ 
+
 	<footer class="footer">
       <div class="container">
-        <p class="text-muted">Copyright &copy; 2015 - All Rights Reserved - EXgames</p>
+        <p class="text-muted">Copyright &copy; 2015 - All Rights Reserved - CompanyNameHere</p>
       </div>
     </footer>
 
@@ -116,4 +124,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-	</body>
+
+</body>
+
+</html>

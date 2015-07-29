@@ -178,7 +178,6 @@ body {
 
 .response-box{
 	height:200px;
-	text-align:center;
 	padding-top:3%;
 }
 
@@ -192,8 +191,4 @@ body {
 
 .table-user-information > tbody > tr > td {
     border-top: 0;
-}
-
-.profile-greeting{
-	
 }

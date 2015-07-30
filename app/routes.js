@@ -87,11 +87,25 @@ module.exports = function(app, passport) {
     });
 	
 	// app.post('/account_edit', do all our passport stuff here);    
-    app.post('/account_edit', passport.authenticate('local-signup', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/account_edit', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+    app.post('/account_edit', isLoggedIn,
+         function(req, res) {
+            // get input
+            var username = req.body.username;
+            var email = req.body.email;
+            var password = req.body.password;
+
+            var thisUser = req.user;
+            thisUser.password = thisUser.generateHash(password);
+            thisUser.username = username;
+            thisUser.email = email;
+                // save the user
+                thisUser.save(function(err) {
+                    if (err)
+                        throw err;
+                    
+                });
+
+    });
 	
 	// =====================================
     // EDIT USER INFORMATION =====================
@@ -104,8 +118,7 @@ module.exports = function(app, passport) {
         });
     });
 	
-	// process the registeration form
-	// app.post('/userinfo_edit', do all our passport stuff here);    
+	// process the change
     app.post('/userinfo_edit', passport.authenticate('local-signup', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/userinfo_edit', // redirect back to the signup page if there is an error
@@ -127,22 +140,14 @@ module.exports = function(app, passport) {
     // process the post form
     app.post('/post', function(req, res) {
         // get input from user
-/*
-        console.log(req.body.category);
-        console.log(req.body.item);
-        console.log(req.body.topic);
-        console.log(req.body.comment);
-*/
         var category = req.body.category;
         var item = req.body.item;
         var topic = req.body.topic;
         var comment = req.body.comment;
 
-        // check user
-        // console.log(req.user.email);
-
+        var thisUser = req.user;    //logged in user
+        
         // save in the post collection(table)
-        var thisUser = req.user;
         var newPost = new Post({
             writer: thisUser,
             category: category, 
@@ -156,10 +161,7 @@ module.exports = function(app, passport) {
                     .populate('writer')
                     .exec(function(error, posts) {
                         console.log(JSON.stringify(posts, null, "\t"))
-            })                    
-                console.log("post save success");
-                // alert the user on success and redirect
-
+            })                                            
                 // update the user data in the USER COLLECTION
                 thisUser.posts.push(newPost);
                 thisUser.save(function(err, thisUser) {
@@ -169,14 +171,13 @@ module.exports = function(app, passport) {
                             .populate('posts')
                             .exec(function(error, users) {
                                 console.log(JSON.stringify(users, null, "\t"))
-                            })
+                            })                        
+                        console.log(JSON.stringify(users, null, "\t"))    
+                        res.render('index.ejs'); // load the index.ejs file                            
                     }
                 });
             }
-        });
-        
-        
-        res.render('index.ejs'); // load the index.ejs file
+        });                        
     });
 
     // =====================================

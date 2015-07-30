@@ -6,13 +6,12 @@ var mongoose = require('mongoose');
 // define the schema for our user model
 var messageSchema = mongoose.Schema({
 
-    message             : {
-        from         : String, //user ?? or objectid?
-        to           : String, //user??
+        from         : {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 
+        to           : {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 
         isRead       : Boolean,
         content      : String,
         time         : Date     // date: { type: Date, default: Date.now },
-    }
+    
 
 });
 

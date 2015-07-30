@@ -63,18 +63,6 @@ module.exports = function(app, passport) {
     }));
 
 
-/*
-    app.post('/register', function(req, res, next {
-        passport.authenticate('local-signup', function(err) {
-            if (err) { res.redirect('/register'); }
-            else {
-                console.log(req.body.username);                
-            }
-        } // authenticate function
-        ); // authenticate
-    } )//function
-    ); //post    
-*/
 
     // =====================================
     // PROFILE =====================
@@ -83,8 +71,7 @@ module.exports = function(app, passport) {
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile.ejs', {
-            user : req.user // get the user out of session and pass to template
-                        
+            user : req.user // get the user out of session and pass to template                        
         });
     });
 	

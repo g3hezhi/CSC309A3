@@ -10,17 +10,13 @@ var bcrypt   = require('bcrypt-nodejs');
 var p     = require('./post');
 var m  = require('./message');
 
-    // =========================================================================
-    // USER ============================================================
-    // =========================================================================
-
-
 // define the schema for our user model
 var userSchema = mongoose.Schema({
 // EX) // comments: [{ body: String, date: Date }],
 // MAKE ADJUSTMENT
 // TODO FIND OUT HOW TO RELATE USER AND HIS/HER POST/MSG
 // http://mongoosejs.com/docs/populate.html 
+// https://alexanderzeitler.com/articles/mongoose-referencing-schema-in-properties-and-arrays/
     local            : {
         email        : {type: String, unique: true},
         username     : {type: String, unqiue: true},
@@ -42,15 +38,8 @@ var userSchema = mongoose.Schema({
         name         : String
     },
 
-    messages         : {
-        message      : [Object] // array of messages
-    },
-
-
-    posts            : {
-        post         : [Object] // array of posts
-    }
-
+    messages : [ { type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
+    posts : [ { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
 
 });
 

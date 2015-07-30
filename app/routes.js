@@ -123,22 +123,6 @@ module.exports = function(app, passport) {
         });
     });
 
-    // =====================================
-    // LOGOUT ==============================
-    // =====================================
-    app.get('/logout', function(req, res) {
-        req.logout();
-        res.redirect('/');
-    });
-
-    // =====================================
-    // POSTING ===============================
-    // =====================================
-    // show the post form
-    app.get('/post', function(req, res) {        
-        // render the page and pass in any flash data if it exists
-        res.render('posting.ejs'); 
-    });
 
     // process the post form
     app.post('/post', function(req, res) {
@@ -154,18 +138,53 @@ module.exports = function(app, passport) {
         var topic = req.body.topic;
         var comment = req.body.comment;
 
+        // check user
+        // console.log(req.user.email);
+
         // save in the post collection(table)
-        var newPost = new Post({category: category, topic: topic, comment: comment});
+        var thisUser = req.user;
+        var newPost = new Post({
+            writer: thisUser,
+            category: category, 
+            topic: topic, 
+            comment: comment});
+
         newPost.save(function(err, newPost) {
             if (err) return console.error(err);
             else {
+                Post.find({})
+                    .populate('writer')
+                    .exec(function(error, posts) {
+                        console.log(JSON.stringify(posts, null, "\t"))
+            })                    
                 console.log("post save success");
                 // alert the user on success and redirect
+
+                // update the user data in the USER COLLECTION
+                thisUser.posts.push(newPost);
+                thisUser.save(function(err, thisUser) {
+                    if (err) return console.error(err);
+                    else {
+                        User.find({})
+                            .populate('posts')
+                            .exec(function(error, users) {
+                                console.log(JSON.stringify(users, null, "\t"))
+                            })
+                    }
+                });
             }
         });
-        // update the user data in the USER COLLECTION
+        
         
         res.render('index.ejs'); // load the index.ejs file
+    });
+
+    // =====================================
+    // LOGOUT ==============================
+    // =====================================
+    app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
     });
 
 

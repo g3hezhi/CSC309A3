@@ -17,14 +17,14 @@ var userSchema = mongoose.Schema({
 // TODO FIND OUT HOW TO RELATE USER AND HIS/HER POST/MSG
 // http://mongoosejs.com/docs/populate.html 
 // https://alexanderzeitler.com/articles/mongoose-referencing-schema-in-properties-and-arrays/
-    local            : {
-        email        : {type: String, unique: true},
-        username     : {type: String, unqiue: true},
-        password     : String,
-        first        : String,
-        last         : String,
-        age          : String
-    },
+    
+    email        : {type: String, unique: true},
+    username     : {type: String, unqiue: true},
+    password     : String,
+    first        : String,
+    last         : String,
+    age          : String,
+    
     facebook         : {
         id           : String,
         token        : String,
@@ -37,6 +37,7 @@ var userSchema = mongoose.Schema({
         email        : String,
         name         : String
     },
+    rating           : [ Number ],  // average this to get rating of a user
 
     messages : [ { type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
     posts : [ { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
@@ -51,7 +52,7 @@ userSchema.methods.generateHash = function(password) {
 
 // checking if password is valid
 userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
+    return bcrypt.compareSync(password, this.password);
 };
 
 

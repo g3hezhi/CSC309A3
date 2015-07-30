@@ -14,7 +14,14 @@ var postSchema = mongoose.Schema({
         comment      : String,
         price        : Number,
         exchange     : String,
-        time         : {type: Date, default: Date.now }
+        time         : {type: Date, default: Date.now },
+        comments	 : [{ 
+        		text: String,
+        		postedBy: {
+        			type: mongoose.Schema.Types.ObjectId,
+        			ref : "User"
+        		}
+        }]
     
 });
 

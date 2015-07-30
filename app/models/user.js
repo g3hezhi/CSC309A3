@@ -17,6 +17,7 @@ var m  = require('./message');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
+// EX) // comments: [{ body: String, date: Date }],
 // MAKE ADJUSTMENT
 // TODO FIND OUT HOW TO RELATE USER AND HIS/HER POST/MSG
 // http://mongoosejs.com/docs/populate.html 
@@ -42,7 +43,7 @@ var userSchema = mongoose.Schema({
     },
 
     messages         : {
-        message      : [Object]
+        message      : [Object] // array of messages
     },
 
 
@@ -51,25 +52,6 @@ var userSchema = mongoose.Schema({
     }
 
 
-/*
-    posts            : {
-        post         : [{
-            writer       : String, // user?? or objectid?
-            description  : String,
-            category     : String,
-            type         : String,  //console/game/other
-            topic        : String,
-            comment      : String,
-            price        : Number,
-            exchange     : String,
-            time         : {type: Date, default: Date.now }
-        }]
-    }
-*/
-
-
-// http://mongoosejs.com/docs/guide.html
-// comments: [{ body: String, date: Date }],
 });
 
 // methods ======================

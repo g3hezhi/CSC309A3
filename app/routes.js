@@ -36,13 +36,14 @@ module.exports = function(app, passport) {
     });
 
     // process the login form
-    // app.post('/login', do all our passport stuff here);
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
-    }));
-
+    })); // req.user property will be set to the authenticated user if succesful
+    /* Setting the failureFlash option to true instructs Passport to flash an error message 
+    using the message given by the strategy's verify callback, if any.
+    */
 
     // =====================================
     // SIGNUP ==============================
@@ -61,6 +62,19 @@ module.exports = function(app, passport) {
         failureFlash : true // allow flash messages
     }));
 
+
+/*
+    app.post('/register', function(req, res, next {
+        passport.authenticate('local-signup', function(err) {
+            if (err) { res.redirect('/register'); }
+            else {
+                console.log(req.body.username);                
+            }
+        } // authenticate function
+        ); // authenticate
+    } )//function
+    ); //post    
+*/
 
     // =====================================
     // PROFILE =====================
@@ -159,10 +173,11 @@ module.exports = function(app, passport) {
             if (err) return console.error(err);
             else {
                 console.log("post save success");
+                // alert the user on success and redirect
             }
         });
         // update the user data in the USER COLLECTION
-        // alert the user on success and redirect
+        
         res.render('index.ejs'); // load the index.ejs file
     });
 
@@ -179,17 +194,3 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
-
-// insert a row(tuple/document) into the 'post' collection
-var insertPost = function(db, callback) {
-   db.collection('posts').insertOne( {
-
-        "writer"       : "some1", // user?? or objectid?
-        "description"  : "something"
-
-   }, function(err, result) {
-    //assert.equal(err, null);
-    console.log("Inserted a document into the 'posts' collection.");
-    
-  });
-};

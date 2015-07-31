@@ -2,6 +2,9 @@
 
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+// load the auth variables
+var configAuth = require('./auth');
 
 // load up the user model
 var User            = require('../app/models/user');
@@ -40,7 +43,6 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, email, password, done) {
-
         // asynchronous
         // User.findOne wont fire unless data is sent back
         process.nextTick(function() {
@@ -111,6 +113,54 @@ module.exports = function(passport) {
 
             // all is well, return successful user
             return done(null, user);
+        });
+
+    }));
+
+    // =========================================================================
+    // GOOGLE ==================================================================
+    // =========================================================================
+    passport.use(new GoogleStrategy({
+
+        clientID        : configAuth.googleAuth.clientID,
+        clientSecret    : configAuth.googleAuth.clientSecret,
+        callbackURL     : configAuth.googleAuth.callbackURL,
+        passReqToCallback: true
+    },
+    function(req, token, refreshToken, profile, done) {
+        console.log(req.user); // undefined
+        // console.log(req.session.passport.user); //error
+        
+        // make the code asynchronous
+        // User.findOne won't fire until we have all our data back from Google
+        process.nextTick(function() {
+            var thisUser          = req.user;
+            // try to find the user based on their google id
+            User.findOne({ 'usernmae' : thisUser.username }, function(err, user) {
+                if (err)
+                    return done(err);
+
+                if (user) {
+
+                    // if a user is found, log them in
+                    return done(null, user);
+                } else {                                    
+
+                    // set all of the relevant information
+                    thisUser.google.id    = profile.id;
+                    thisUser.google.token = token;
+                    thisUser.google.name  = profile.displayName;
+                    thisUser.google.email = profile.emails[0].value; // pull the first email
+
+                    // save the user
+                    thisUser.save(function(err) {
+                        if (err)
+                            throw err;
+                        return done(null, thisUser);
+                    });
+
+                }
+            });
         });
 
     }));

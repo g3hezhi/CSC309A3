@@ -172,7 +172,7 @@ module.exports = function(app, passport) {
                             .exec(function(error, users) {
                                 console.log(JSON.stringify(users, null, "\t"))
                             })                        
-                        console.log(JSON.stringify(users, null, "\t"))    
+                        //console.log(JSON.stringify(users, null, "\t"))    
                         res.render('index.ejs'); // load the index.ejs file                            
                     }
                 });

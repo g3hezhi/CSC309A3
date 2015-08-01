@@ -70,42 +70,41 @@
     <div class="container"> 
         <div class="row">
             <div class="col-md-3">      
-                <p class="lead"><%= "Hi,"+  user.email %></p>
+                <p class="lead">Hello username</p>
 				<img class="logo" src="images/default_profile.png" alt="">
                 <div class="list-group">
 					<a href="/profile" class="list-group-item">Profile</a>
                     <a href="/account_edit" class="list-group-item">Edit Account</a>
 					<a href="/userinfo_edit" class="list-group-item">Edit Personal Information</a>
-                    <a href="/user_post" class="list-group-item">My Posts</a>
+                    <a href="#" class="list-group-item">My Posts</a>
                     <a href="#" class="list-group-item">Inbox</a>
                 </div>  
             </div>
             <div class="col-md-8 col-md-offset-1 response-box">
-                <table class="table table-user-information">
-                    <tbody>
-						<tr>
-							<td>First Name:</td>
-							<td>Victor</td>
-						</tr>
-						<tr>
-							<td>Surname:</td>
-							<td>Gong</td>
-						</tr>
-						<tr>
-							<td>Joined on:</td>
-							<td>07/29/2015</td>
-						</tr>
-						<tr>
-							<td>Email</td>
-							<td><a href="mailto:info@support.com">victor@mail.com</a></td>
-						</tr>
-                    </tbody>
-                </table>
+                <form role="form" action="/account_edit" method="post">
+                    <div class="form-group">    
+                        <label for="email">Username*</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+                    </div>
+                    <div class="form-group">    
+                        <label for="email">Email*</label>
+                        <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password*</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" >
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password confirmation*</label>
+                        <input type="password" class="form-control" id="pwd_confirmation" placeholder="Retype password" >
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label><br>
+                        <select class="input-medium bfh-countries" id="country" data-country="CA"></select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="b_submit">Submit</button>
+              </form>
             </div>
-            <p>Register with:</p>
-
-            <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
-
         </div>  
     </div>
  

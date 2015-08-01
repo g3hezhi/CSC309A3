@@ -1,0 +1,12 @@
+body {
+    padding-top: 5%;; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+	background-color: #6495ed;
+}
+
+.login-box{
+	background-color: white;
+	width: 70%;
+	margin-left: 15%;
+	padding: 5%;
+	border-radius: 20px;
+}

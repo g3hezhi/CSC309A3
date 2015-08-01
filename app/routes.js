@@ -35,16 +35,14 @@ module.exports = function(app, passport) {
     })); // req.user property will be s
     //direct express to locate cssfiles 
     app.use(express.static(__dirname + '/public'));
+
     // =====================================
     // LOGIN ===============================
     // =====================================
     // show the login form
-<<<<<<< HEAD
+
     app.get('/login', function(req, res) {        
-=======
-    app.get('/login', function(req, res) {   
-        // DELETE 
->>>>>>> origin/master
+
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') }); 
     });
@@ -68,14 +66,51 @@ module.exports = function(app, passport) {
         res.render('register.ejs', { message: req.flash('signupMessage') });
     });
 
-    // process the registeration form
-    // app.post('/register', do all our passport stuff here);    
+
+    app.post('/register', function(req, res, next) {
+        // prevent xss for security
+        req.sanitize('username').escape();
+        req.sanitize('password').escape();
+        req.sanitize('email').escape();
+        req.sanitize('pwd_confirmation').escape();
+        
+        req.checkBody('email', 'Your email address is not valid').isEmail();
+        req.checkBody('username', 'Fill username').notEmpty();
+
+        var errors = req.validationErrors();
+        if(errors) {
+            res.render('register.ejs', {message: util.inspect(errors)});            
+        } else if(req.body.password != req.body.pwd_confirmation ) {
+            res.render('register.ejs', {message: 'Two passwords do not match'});            
+        } 
+        else {
+            next();
+        }
+        
+    })
+
+    // process the registeration form  
     app.post('/register', passport.authenticate('local-signup', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/register', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
 
+
+
+    // =====================================
+    // PRODUCT ==============================
+    // =====================================
+    // show the registration form
+    app.get('/product', function(req, res) {
+        // render the page and pass in any flash data if it exists
+        res.render('product.ejs');
+    });
+
+    // process the registeration form
+    app.post('/product', function(req, res) {
+
+    });
 
 
     // =====================================
@@ -103,22 +138,37 @@ module.exports = function(app, passport) {
 	// app.post('/account_edit', do all our passport stuff here);    
     app.post('/account_edit', isLoggedIn,
          function(req, res) {
+            // protection against xss for security
+            req.sanitize('username').escape();
+            req.sanitize('email').escape();
+            req.sanitize('password').escape();
+            req.sanitize('pwd_confirmation').escape();
+        
+            req.checkBody('email', 'Your email address is not valid').isEmail();
+            req.checkBody('username', 'Fill username').notEmpty();
+            req.checkBody('password', 'Fill password').notEmpty();
+            
             // get input
             var username = req.body.username;
             var email = req.body.email;
             var password = req.body.password;
 
-            var thisUser = req.user;
-            thisUser.password = thisUser.generateHash(password);
-            thisUser.username = username;
-            thisUser.email = email;
+            var errors = req.validationErrors();
+            if(errors) {
+                res.render('account_edit.ejs', {message: util.inspect(errors)});            
+            } else if(req.body.password != req.body.pwd_confirmation ) {
+                res.render('account_edit.ejs', {message: 'Two passwords do not match'});            
+            } else {
+                var thisUser = req.user;
+                thisUser.password = thisUser.generateHash(password);
+                thisUser.username = username;
+                thisUser.email = email;
                 // save the user
                 thisUser.save(function(err) {
                     if (err)
                         throw err;
-                    
                 });
-
+            }
     });
 	
 	// =====================================
@@ -153,53 +203,52 @@ module.exports = function(app, passport) {
 
     // process the post form
     app.post('/post', function(req, res) {
+
+        req.sanitize('category').escape();
+        req.sanitize('item').escape();
+        req.sanitize('topic').escape();
+        req.sanitize('comment').escape();
+    
+        
+        req.checkBody('topic', 'Fill topic').notEmpty();
+        req.checkBody('comment', 'Fill comment').notEmpty();
+
         // get input from user
         var category = req.body.category;
         var item = req.body.item;
         var topic = req.body.topic;
         var comment = req.body.comment;
 
-        var thisUser = req.user;    //logged in user
-                
-        var newPost = new Post({
-            writer: thisUser._id,
-            category: category, 
-            topic: topic, 
-            comment: comment});
+        var errors = req.validationErrors();
+        if(errors) {
+            res.render('post.ejs', {message: util.inspect(errors)});            
+        } else if(req.body.password != req.body.pwd_confirmation ) {
+            res.render('post.ejs', {message: 'Two passwords do not match'});            
+        } else {
+            var thisUser = req.user;    //logged in user
+                    
+            var newPost = new Post({
+                writer: thisUser._id,
+                category: category, 
+                topic: topic, 
+                comment: comment});
 
-        // save in the db
-        newPost.save(function(err, newPost) {
-            if (err) return console.error(err);
-<<<<<<< HEAD
-            else {
-                Post.find({})
-                    .populate('writer')
-                    .exec(function(error, posts) {
-                        console.log(JSON.stringify(posts, null, "\t"))
-            })                                            
-=======
-            else {            
->>>>>>> origin/master
-                // update the user data in the USER COLLECTION
-                thisUser.posts.push(newPost);
-                thisUser.save(function(err, thisUser) {
-                    if (err) return console.error(err);
-                    else {
-<<<<<<< HEAD
-                        User.find({})
-                            .populate('posts')
-                            .exec(function(error, users) {
-                                console.log(JSON.stringify(users, null, "\t"))
-                            })                        
-                        console.log(JSON.stringify(users, null, "\t"))    
-                        res.render('index.ejs'); // load the index.ejs file                            
-=======
-                        res.render('index.ejs'); 
->>>>>>> origin/master
-                    }
-                });
-            }
-        });                        
+            // save in the db
+            newPost.save(function(err, newPost) {
+                if (err) return console.error(err);
+                else {            
+                    // update the user data in the USER COLLECTION
+                    thisUser.posts.push(newPost);
+                    thisUser.save(function(err, thisUser) {
+                        if (err) return console.error(err);
+                        else {
+                            res.render('index.ejs'); 
+                        }
+                    });
+                }
+            });
+        }                        
+
     });
 
     // =====================================

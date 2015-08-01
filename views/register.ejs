@@ -80,13 +80,11 @@
             <div class="container">
               <br> 
               </br>
-              <br> <!-- TODO need to be fixed (h2 login is behind the header) -->
-              <h2>Create a new EXgames account.</h2>
-              </br>
     <% if (message.length > 0) { %>
         <div class="alert alert-danger"><%= message %></div>
-    <% } %>
-
+    <% } %>              
+              <br> <!-- TODO need to be fixed (h2 login is behind the header) -->
+              <h2>Create a new EXgames account.</h2>
               <form role="form" action="/register" method="post">
                     <div class="form-group">    
                         <label for="email">Username*</label>

@@ -80,6 +80,7 @@
                     <a href="#" class="list-group-item">Inbox</a>
                 </div>  
             </div>
+            <br>
             <div class="col-md-8 col-md-offset-1 response-box">
                 <form role="form" action="/account_edit" method="post">
                     <div class="form-group">    
@@ -96,7 +97,7 @@
                     </div>
                     <div class="form-group">
                         <label for="pwd">Password confirmation*</label>
-                        <input type="password" class="form-control" id="pwd_confirmation" placeholder="Retype password" >
+                        <input type="password" class="form-control" id="pwd_confirmation" placeholder="Retype password" name="pwd_confirmation" >
                     </div>
                     <div class="form-group">
                         <label for="country">Country</label><br>
@@ -104,11 +105,10 @@
                     </div>
                     <button type="submit" class="btn btn-primary" id="b_submit">Submit</button>
               </form>
+
             </div>
         </div>  
     </div>
- 
-
 	<footer class="footer">
       <div class="container">
         <p class="text-muted">Copyright &copy; 2015 - All Rights Reserved - CompanyNameHere</p>

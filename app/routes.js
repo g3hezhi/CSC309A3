@@ -244,7 +244,8 @@ module.exports = function(app, passport) {
         req.sanitize('item').escape();
         req.sanitize('topic').escape();
         req.sanitize('comment').escape();
-            
+        req.sanitize('price').escape();
+
         req.checkBody('topic', 'Fill topic').notEmpty();
         req.checkBody('comment', 'Fill comment').notEmpty();
 
@@ -253,6 +254,7 @@ module.exports = function(app, passport) {
         var item = req.body.item;
         var topic = req.body.topic;
         var comment = req.body.comment;
+        var price = req.body.price;
 
         var errors = req.validationErrors();
         if(errors) {
@@ -266,7 +268,8 @@ module.exports = function(app, passport) {
                 writer: thisUser._id,
                 category: category, 
                 topic: topic, 
-                comment: comment});
+                comment: comment,
+                price : price});
 
             // save in the db
             newPost.save(function(err, newPost) {

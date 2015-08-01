@@ -59,6 +59,9 @@
 					</li>
                 </ul>
 				<ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href='/profile'><%= "Hi,"+user.username %></a>
+                    </li>
 					<li>
 						<a href="/login">Logout</a>
 					</li>
@@ -140,9 +143,9 @@
                             <img src="http://placehold.it/320x150" alt="">
 							<% if(posts.length>1){ %>
 							   <div class="caption">
-									<h4 class="pull-right"><%="price "+posts[posts.length-1].price%></h4>
-									<h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-1].topic%></a></h4>								
-									<p><%="info "+posts[posts.length-1].comment%></p>
+									<h4 class="pull-right"><%= posts[posts.length-1].price + "$" %></h4>
+									<h4 id="post_topic"><a href="#"><%=+ posts[posts.length-1].topic%></a></h4>								
+									<p><%= posts[posts.length-1].comment%></p>
 								</div>
 							 <% } else{ %>  
 								<div class="caption">

@@ -133,12 +133,15 @@
                 <div class="row">
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
+		
+							
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">$24.99</h4>
-                                <h4><a href="#"><%= "Hi,"+user.posts %></a>
+                                <h4 class="pull-right"><%="price "+posts[posts.length-1].price%></h4>
+                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-1].topic%></a>
                                 </h4>
-                                <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+								
+                                <p><%="info "+posts[posts.length-1].comment%></p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">15 reviews</p>
@@ -151,16 +154,18 @@
                                 </p>
                             </div>
                         </div>
+
                     </div>
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">$64.99</h4>
-                                <h4><a href="#">Second Product</a>
+                                <h4 class="pull-right"><%="price "+posts[posts.length-2].price%></h4>
+                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-2].topic%></a>
                                 </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								
+                                <p><%="info "+posts[posts.length-2].comment%></p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">12 reviews</p>
@@ -179,10 +184,11 @@
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">$74.99</h4>
-                                <h4><a href="#">Third Product</a>
+                                <h4 class="pull-right"><%="price "+posts[posts.length-3].price%></h4>
+                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-3].topic%></a>
                                 </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								
+                                <p><%="info "+posts[posts.length-3].comment%></p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">31 reviews</p>
@@ -201,10 +207,11 @@
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">$84.99</h4>
-                                <h4><a href="#">Fourth Product</a>
+                                <h4 class="pull-right"><%="price "+posts[posts.length-4].price%></h4>
+                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-4].topic%></a>
                                 </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								
+                                <p><%="info "+posts[posts.length-4].comment%></p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">6 reviews</p>
@@ -223,10 +230,11 @@
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">$94.99</h4>
-                                <h4><a href="#">Fifth Product</a>
+                                <h4 class="pull-right"><%="price "+posts[posts.length-5].price%></h4>
+                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-5].topic%></a>
                                 </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								
+                                <p><%="info "+posts[posts.length-5].comment%></p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">18 reviews</p>
@@ -245,10 +253,11 @@
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">$94.99</h4>
-                                <h4><a href="#">Sixth Product</a>
+                                <h4 class="pull-right"><%="price "+posts[posts.length-6].price%></h4>
+                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-6].topic%></a>
                                 </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								
+                                <p><%="info "+posts[posts.length-6].comment%></p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">18 reviews</p>
@@ -267,10 +276,11 @@
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">$94.99</h4>
-                                <h4><a href="#">Seventh Product</a>
+                                <h4 class="pull-right"><%="price "+posts[posts.length-7].price%></h4>
+                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-7].topic%></a>
                                 </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								
+                                <p><%="info "+posts[posts.length-7].comment%></p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">18 reviews</p>
@@ -289,10 +299,11 @@
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">$94.99</h4>
-                                <h4><a href="#">Eighth Product</a>
+                                <h4 class="pull-right"><%="price "+posts[posts.length-8].price%></h4>
+                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-8].topic%></a>
                                 </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								
+                                <p><%="info "+posts[posts.length-8].comment%></p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">18 reviews</p>
@@ -311,10 +322,11 @@
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">$94.99</h4>
-                                <h4><a href="#">Ninth Product</a>
+                                <h4 class="pull-right"><%="price "+posts[posts.length-9].price%></h4>
+                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-9].topic%></a>
                                 </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								
+                                <p><%="info "+posts[posts.length-9].comment%></p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">18 reviews</p>

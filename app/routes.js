@@ -20,9 +20,14 @@ module.exports = function(app, passport) {
     // =====================================
 
     app.get('/', isLoggedIn, function(req, res) {
-        res.render('index.ejs', {
-            user : req.user // get the user out of session and pass to template
+	Post.find({}, function(err, posts) {
+		console.log(posts.length);
+		res.render('index.ejs', {
+            user : req.user, // get the user out of session and pass to template
+			posts : posts
         });
+	});
+
     });
     
     // process the change
@@ -272,7 +277,13 @@ module.exports = function(app, passport) {
                     thisUser.save(function(err, thisUser) {
                         if (err) return console.error(err);
                         else {
-                            res.render('index.ejs',{ user: thisUser}); 
+                            	Post.find({}, function(err, posts) {
+									console.log(posts.length);
+									res.render('index.ejs', {
+										user : req.user, // get the user out of session and pass to template
+										posts : posts
+									});
+								});
                         }
                     });
                 }

@@ -111,10 +111,19 @@ module.exports = function(app, passport) {
     // =====================================
     
     app.get('/product', function(req, res) {
-        // render the page and pass in any flash data if it exists
-        res.render('product.ejs');
-    });
-
+		var pid = req.query.pid;
+		console.log(pid);	
+		Post.findOne({_id:pid}, function(err, post) {
+			console.log(post.topic);
+			User.findOne({_id:post.writer}, function(err, user) {
+				console.log(user.username);
+				res.render('product.ejs',{post: post,
+										  user: user
+					});
+				});
+	
+			});
+		});
 
     app.post('/product', function(req, res) {
 

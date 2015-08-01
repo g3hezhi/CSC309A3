@@ -21,7 +21,7 @@ module.exports = function(app, passport) {
 
     app.get('/', isLoggedIn, function(req, res) {
 	Post.find({}, function(err, posts) {
-		console.log(posts[0].id);
+		console.log(posts.length);
 		res.render('index.ejs', {
             user : req.user, // get the user out of session and pass to template
 			posts : posts
@@ -111,23 +111,12 @@ module.exports = function(app, passport) {
     // =====================================
     
     app.get('/product', function(req, res) {
-		var pid = req.query.pid;
-		console.log(pid);	
-		Post.findOne({_id:pid}, function(err, post) {
-			console.log(post.topic);
-			User.findOne({_id:post.writer}, function(err, user) {
-				console.log(user.username);
-				res.render('product.ejs',{post: post,
-										  user: user
-					});
-				});
-	
-			});
         // render the page and pass in any flash data if it exists
-        
+        res.render('product.ejs');
     });
-    
-	app.post('/product', function(req, res) {
+
+
+    app.post('/product', function(req, res) {
 
     });
 
@@ -255,7 +244,8 @@ module.exports = function(app, passport) {
         req.sanitize('item').escape();
         req.sanitize('topic').escape();
         req.sanitize('comment').escape();
-            
+        req.sanitize('price').escape();
+
         req.checkBody('topic', 'Fill topic').notEmpty();
         req.checkBody('comment', 'Fill comment').notEmpty();
 
@@ -264,6 +254,7 @@ module.exports = function(app, passport) {
         var item = req.body.item;
         var topic = req.body.topic;
         var comment = req.body.comment;
+        var price = req.body.price;
 
         var errors = req.validationErrors();
         if(errors) {
@@ -277,7 +268,8 @@ module.exports = function(app, passport) {
                 writer: thisUser._id,
                 category: category, 
                 topic: topic, 
-                comment: comment});
+                comment: comment,
+                price : price});
 
             // save in the db
             newPost.save(function(err, newPost) {

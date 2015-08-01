@@ -215,15 +215,7 @@ module.exports = function(app, passport) {
                             .exec(function(error, users) {
                                 //console.log(JSON.stringify(users, null, "\t"))
                             })                        
-<<<<<<< Updated upstream
                         //console.log(JSON.stringify(users, null, "\t"))    
-=======
-<<<<<<< HEAD
-                        
-=======
-                        //console.log(JSON.stringify(users, null, "\t"))    
->>>>>>> origin/master
->>>>>>> Stashed changes
                         res.render('index.ejs'); // load the index.ejs file                            
                     }
                 });

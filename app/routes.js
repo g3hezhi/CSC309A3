@@ -2,13 +2,18 @@
 var express = require('express');
 var app      = express();
 var mongodb = require('mongodb');
-
+var csurf = require('csurf');
 var User            = require('../app/models/user');
 var Post            = require('../app/models/post');
 var Message         = require('../app/models/message');
 
+
+var csrfProtection = csurf({cookie: false});
 var mongoClient = mongodb.MongoClient;
 module.exports = function(app, passport) {
+
+    //direct express to locate cssfiles 
+    app.use(express.static(__dirname + '/public'));
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -24,6 +29,7 @@ module.exports = function(app, passport) {
     app.get('/contact', function(req, res) {
         res.render('contact.ejs'); // load the contact.ejs file
     });
+
 	app.get('/about', function(req, res) {
         res.render('about.ejs'); // load the about.ejs file
     });
@@ -33,26 +39,23 @@ module.exports = function(app, passport) {
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     })); // req.user property will be s
-    //direct express to locate cssfiles 
-    app.use(express.static(__dirname + '/public'));
 
     // =====================================
     // LOGIN ===============================
     // =====================================
     // show the login form
 
-    app.get('/login', function(req, res) {        
-
+    app.get('/login', csrfProtection, function(req, res) {
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', { message: req.flash('loginMessage') }); 
+        res.render('login', { message: req.flash('loginMessage'), csrfToken: req.csrfToken() }); 
     });
-
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     })); // req.user property will be set to the authenticated user if succesful
+
     /* Setting the failureFlash option to true instructs Passport to flash an error message 
     using the message given by the strategy's verify callback, if any.
     */
@@ -236,8 +239,7 @@ module.exports = function(app, passport) {
         req.sanitize('item').escape();
         req.sanitize('topic').escape();
         req.sanitize('comment').escape();
-    
-        
+            
         req.checkBody('topic', 'Fill topic').notEmpty();
         req.checkBody('comment', 'Fill comment').notEmpty();
 
@@ -314,6 +316,6 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
 
-    // if they aren't redirect them to the home page
-    res.redirect('/');
+    // if they aren't redirect them to the login page
+    res.redirect('/login');
 }

@@ -14,7 +14,7 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var expressValidator = require('express-validator');
 var configDB = require('./config/database.js');
-var csurf = require('csurf');
+
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database

@@ -220,6 +220,42 @@ body {
 	z-index: 1000;
 }
 
+.about-info{
+	width: 70%;
+	margin-left: 15%;
+	padding-bottom: 3%;
+	font-size: 20px;
+}
+
+.about-info p{
+	font-size: 17px;
+}
+
+.contact-ways{
+	width: 50%;
+	margin-left: 25%;
+	padding-bottom 3%;
+	font-size: 20px;
+}
+
+.contact-form{
+	width: 70%;
+	margin-left: 15%;
+	padding-bottom: 5%;
+}
+
+.fa{
+	font-size: 25px;
+}
+
+.center-table{
+	margin: 0 auto;
+	float: none;
+}
+
+.center-table td{
+	padding: 8px;
+}
 
 /*Page Hover Test, Source: http://www.cssscript.com/transparent-image-hover-overlay-with-pure-css-css3/*/
 .media {

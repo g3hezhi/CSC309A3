@@ -33,6 +33,7 @@ module.exports = function(app, passport) {
     // =====================================
     // show the login form
     app.get('/login', function(req, res) {   
+        // DELETE 
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') }); 
     });
@@ -201,34 +202,23 @@ module.exports = function(app, passport) {
         var comment = req.body.comment;
 
         var thisUser = req.user;    //logged in user
-        
-        // save in the post collection(table)
+                
         var newPost = new Post({
-            writer: thisUser,
+            writer: thisUser._id,
             category: category, 
             topic: topic, 
             comment: comment});
 
+        // save in the db
         newPost.save(function(err, newPost) {
             if (err) return console.error(err);
-            else {
-                Post.find({})
-                    .populate('writer')
-                    .exec(function(error, posts) {
-                        //console.log(JSON.stringify(posts, null, "\t"))
-            })                                            
+            else {            
                 // update the user data in the USER COLLECTION
                 thisUser.posts.push(newPost);
                 thisUser.save(function(err, thisUser) {
                     if (err) return console.error(err);
                     else {
-                        User.find({})
-                            .populate('posts')
-                            .exec(function(error, users) {
-                                //console.log(JSON.stringify(users, null, "\t"))
-                            })                        
-                        //console.log(JSON.stringify(users, null, "\t"))    
-                        res.render('index.ejs'); // load the index.ejs file                            
+                        res.render('index.ejs'); 
                     }
                 });
             }

@@ -2,6 +2,8 @@
 var express = require('express');
 var app      = express();
 var mongodb = require('mongodb');
+var util = require('util');
+var sanitizer = require('sanitizer');
 
 var User            = require('../app/models/user');
 var Post            = require('../app/models/post');
@@ -17,7 +19,7 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         res.render('index.ejs'); // load the index.ejs file
     });
-	 app.get('/contact', function(req, res) {
+	app.get('/contact', function(req, res) {
         res.render('contact.ejs'); // load the contact.ejs file
     });
 	app.get('/about', function(req, res) {
@@ -30,7 +32,7 @@ module.exports = function(app, passport) {
     // LOGIN ===============================
     // =====================================
     // show the login form
-    app.get('/login', function(req, res) {        
+    app.get('/login', function(req, res) {   
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') }); 
     });
@@ -54,13 +56,54 @@ module.exports = function(app, passport) {
         res.render('register.ejs', { message: req.flash('signupMessage') });
     });
 
-    // process the registeration form
-    // app.post('/register', do all our passport stuff here);    
+    // validate input
+    app.post('/register', function(req, res, next) {
+        // console.log("validate");
+        sanitizer.sanitize(req.body.username);
+        sanitizer.sanitize(req.body.password);
+        sanitizer.sanitize(req.body.email);
+        sanitizer.sanitize(req.body.pwd_confirmation);
+
+        req.checkBody('email', 'Your email address is not valid').isEmail();
+        req.checkBody('username', 'Fill username').notEmpty();
+        
+
+
+        var errors = req.validationErrors();
+        if(errors) {
+            res.render('register.ejs', {message: util.inspect(errors)});
+            
+        } else if(req.body.password != req.body.pwd_confirmation ) {
+            res.render('register.ejs', {message: 'Two passwords do not match'});
+            
+        } 
+        else {
+            next();
+        }
+        
+    })
+
+    // process the registeration form  
     app.post('/register', passport.authenticate('local-signup', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/register', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
+
+
+    // =====================================
+    // PRODUCT ==============================
+    // =====================================
+    // show the registration form
+    app.get('/product', function(req, res) {
+        // render the page and pass in any flash data if it exists
+        res.render('product.ejs');
+    });
+
+    // process the registeration form
+    app.post('/product', function(req, res) {
+
+    });
 
 
 
@@ -160,7 +203,7 @@ module.exports = function(app, passport) {
                 Post.find({})
                     .populate('writer')
                     .exec(function(error, posts) {
-                        console.log(JSON.stringify(posts, null, "\t"))
+                        //console.log(JSON.stringify(posts, null, "\t"))
             })                                            
                 // update the user data in the USER COLLECTION
                 thisUser.posts.push(newPost);
@@ -170,9 +213,17 @@ module.exports = function(app, passport) {
                         User.find({})
                             .populate('posts')
                             .exec(function(error, users) {
-                                console.log(JSON.stringify(users, null, "\t"))
+                                //console.log(JSON.stringify(users, null, "\t"))
                             })                        
-                        console.log(JSON.stringify(users, null, "\t"))    
+<<<<<<< Updated upstream
+                        //console.log(JSON.stringify(users, null, "\t"))    
+=======
+<<<<<<< HEAD
+                        
+=======
+                        //console.log(JSON.stringify(users, null, "\t"))    
+>>>>>>> origin/master
+>>>>>>> Stashed changes
                         res.render('index.ejs'); // load the index.ejs file                            
                     }
                 });

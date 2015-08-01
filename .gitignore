@@ -12,3 +12,5 @@ dev-slider.html
 dev-colorpicker.html
 dev-phone.html
 dev-number.html
+
+views/profile.ejs

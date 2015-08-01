@@ -39,7 +39,12 @@ module.exports = function(app, passport) {
     // LOGIN ===============================
     // =====================================
     // show the login form
+<<<<<<< HEAD
     app.get('/login', function(req, res) {        
+=======
+    app.get('/login', function(req, res) {   
+        // DELETE 
+>>>>>>> origin/master
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') }); 
     });
@@ -155,27 +160,32 @@ module.exports = function(app, passport) {
         var comment = req.body.comment;
 
         var thisUser = req.user;    //logged in user
-        
-        // save in the post collection(table)
+                
         var newPost = new Post({
-            writer: thisUser,
+            writer: thisUser._id,
             category: category, 
             topic: topic, 
             comment: comment});
 
+        // save in the db
         newPost.save(function(err, newPost) {
             if (err) return console.error(err);
+<<<<<<< HEAD
             else {
                 Post.find({})
                     .populate('writer')
                     .exec(function(error, posts) {
                         console.log(JSON.stringify(posts, null, "\t"))
             })                                            
+=======
+            else {            
+>>>>>>> origin/master
                 // update the user data in the USER COLLECTION
                 thisUser.posts.push(newPost);
                 thisUser.save(function(err, thisUser) {
                     if (err) return console.error(err);
                     else {
+<<<<<<< HEAD
                         User.find({})
                             .populate('posts')
                             .exec(function(error, users) {
@@ -183,6 +193,9 @@ module.exports = function(app, passport) {
                             })                        
                         console.log(JSON.stringify(users, null, "\t"))    
                         res.render('index.ejs'); // load the index.ejs file                            
+=======
+                        res.render('index.ejs'); 
+>>>>>>> origin/master
                     }
                 });
             }

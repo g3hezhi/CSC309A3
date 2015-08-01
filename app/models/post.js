@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 // define the schema for our user model
 var postSchema = mongoose.Schema({
     
-	    writer       : {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 
+	writer       : {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 
         description  : String,
         category     : String,
         type         : String,  //console/game/other

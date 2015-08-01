@@ -81,7 +81,15 @@
                 </div>  
             </div>
             <div class="col-md-8 col-md-offset-1 response-box">
-				<p class="lead"><%= "Hi,"+  user.posts[0].topic %></p>
+					<table>
+						<% for(var i=0; i < postArray.posts.length; i++) { %>
+						   <tr>
+							 <td><%= "Topic:"+ postArray.posts[i].topic %></td>
+							 <td><%= "Information:"+ postArray.posts[i].comment %></td>
+							 <td><%= "Date:"+ postArray.posts[i].time %></td>
+						   </tr>
+						<% } %>
+					</table>
             </div>
             <p>Register with:</p>
 

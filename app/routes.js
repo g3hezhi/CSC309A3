@@ -119,6 +119,7 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
+		
         res.render('profile.ejs', {
             user : req.user // get the user out of session and pass to template                        
         });
@@ -169,6 +170,43 @@ module.exports = function(app, passport) {
                         throw err;
                 });
             }
+    });
+	app.get('/account_edit', isLoggedIn, function(req, res) {
+        res.render('account_edit.ejs', {
+			user : req.user
+             // get the user out of session and pass to template
+        });
+    });
+	app.get('/user_post', isLoggedIn, function(req, res) {
+		var thisUser=req.user;
+		User.findOne({'email': thisUser.email})
+        .populate('posts')
+        .exec(function (err, postArray) {
+            if (err) return handleError(err);
+			
+            //console.log(postArray.posts[2].topic);
+			    res.render('user_post.ejs', {
+            user : req.user, // get the user out of session and pass to template  
+			postArray : postArray
+        });
+        });
+		
+		
+
+    });
+	app.get('/user_inbox', isLoggedIn, function(req, res) {
+		var thisUser=req.user;
+		User.findOne({'email': thisUser.email})
+        .populate('message')
+        .exec(function (err, msgArray) {
+            if (err) return handleError(err);
+			
+            //console.log(msgArray.posts[2].topic);
+			    res.render('user_inbox.ejs', {
+            user : req.user, // get the user out of session and pass to template  
+			msgArray : msgArray
+        });
+        });
     });
 	
 	// =====================================
@@ -242,7 +280,7 @@ module.exports = function(app, passport) {
                     thisUser.save(function(err, thisUser) {
                         if (err) return console.error(err);
                         else {
-                            res.render('index.ejs'); 
+                            res.render('index.ejs',{ user: thisUser}); 
                         }
                     });
                 }

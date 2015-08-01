@@ -168,6 +168,18 @@ module.exports = function(app, passport) {
         failureFlash : true // allow flash messages
     }));
 	
+	app.get('/user_post', isLoggedIn, function(req, res) {
+        res.render('user_post.ejs', {
+            user : req.user // get the user out of session and pass to template
+        });
+    });
+	
+	app.post('/userinfo_edit', passport.authenticate('local-signup', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/userinfo_edit', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+	
 	// =====================================
     // POSTING =====================
     // =====================================

@@ -14,16 +14,25 @@ module.exports = function(app, passport) {
     // HOME PAGE (with login links) ========
     // =====================================
 
-    app.get('/', function(req, res) {
-        res.render('index.ejs'); // load the index.ejs file
+    app.get('/', isLoggedIn, function(req, res) {
+        res.render('index.ejs', {
+            user : req.user // get the user out of session and pass to template
+        });
     });
-	 app.get('/contact', function(req, res) {
+    
+    // process the change
+    app.get('/contact', function(req, res) {
         res.render('contact.ejs'); // load the contact.ejs file
     });
 	app.get('/about', function(req, res) {
         res.render('about.ejs'); // load the about.ejs file
     });
 	
+    app.post('/index', passport.authenticate('local-login', {
+        successRedirect : '/index', // redirect to the secure profile section
+        failureRedirect : '/login', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    })); // req.user property will be s
     //direct express to locate cssfiles 
     app.use(express.static(__dirname + '/public'));
     // =====================================

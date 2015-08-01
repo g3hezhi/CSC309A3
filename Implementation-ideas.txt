@@ -1,20 +1,21 @@
 Implementation Ideas
 
-#1	Register
-login with Google
-only after Google sign in, user can create a profile?
-edit profile, post: only after entering password?
 
-#2	Login Cookie
-login request to server
-server checks password
-server sends cookie to the browser
-cookie only keeps the userid value on the user's machine
-keep this cookie in the browser until the user closes it
-This cookie contains userid
+# Security
+	You should take care of at least two well known security vulnerability and describe that. If you use any framework that take care of those vulnerability, then explain how that works and how you have tested it in your application.
+	1.	XSS
+	2.	XSRF
 
-#3 Security
+	Security: /15
+	- What preventative measure you have taken to secure your site.
+		1. Password is hashed
+		2. Use express-validaotr to protect against XSS
+		3. Use express-csurf to protect against XSRF
+	- Describe how you have tested the security of your site, include evidence.
+	
 Might I suggest salting and hashing passwords with for example bcrypt, and using mongojs instead of mongoose?
+	
+
 
 #4 performance
 http://docs.mongodb.org/manual/indexes/

@@ -209,6 +209,7 @@ body {
 	background: #253340;
 	color: #fff;
 	font-family: Calibri;
+	margin-bottom: 5%;
 }
 
 .border{
@@ -220,6 +221,43 @@ body {
 	z-index: 1000;
 }
 
+.about-info{
+	width: 70%;
+	margin-left: 15%;
+	padding-bottom: 3%;
+	font-size: 20px;
+}
+
+.about-info p{
+	font-size: 17px;
+}
+
+.contact-ways{
+	width: 50%;
+	margin-left: 25%;
+	padding-bottom: 3%;
+	font-size: 20px;
+}
+
+.contact-form{
+	width: 50%;
+	margin-left: 25%;
+	padding-bottom: 5%;
+}
+
+ .fa{
+	font-size: 25px;
+}
+
+.center-table
+{
+	margin: 0 auto;
+	float: none;
+}
+
+.center-table  td{
+	padding: 8px;
+}
 
 /*Page Hover Test, Source: http://www.cssscript.com/transparent-image-hover-overlay-with-pure-css-css3/*/
 .media {
@@ -231,7 +269,7 @@ body {
 .media__image { display: block; }
 
 .media__body {
-  background: rgba(41, 128, 185, 0.7);
+  background: f5f5f5;
   bottom: 0;
   color: white;
   font-size: 1em;

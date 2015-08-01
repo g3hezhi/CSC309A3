@@ -138,13 +138,19 @@
 		
 							
                             <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right"><%="price "+posts[posts.length-1].price%></h4>
-                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-1].topic%></a>
-                                </h4>
-								
-                                <p><%="info "+posts[posts.length-1].comment%></p>
-                            </div>
+							<% if(posts.length>1){ %>
+							   <div class="caption">
+									<h4 class="pull-right"><%="price "+posts[posts.length-1].price%></h4>
+									<h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-1].topic%></a></h4>								
+									<p><%="info "+posts[posts.length-1].comment%></p>
+								</div>
+							 <% } else{ %>  
+								<div class="caption">
+									<h4 class="pull-right">no price yet</h4>
+									<h4 id="post_topic"><a href="#">"no item yet"</a></h4>								
+									<p>no information</p>
+								</div>
+							<% } %>
                             <div class="ratings">
                                 <p class="pull-right">15 reviews</p>
                                 <p> 
@@ -162,13 +168,19 @@
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right"><%="price "+posts[posts.length-2].price%></h4>
-                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-2].topic%></a>
-                                </h4>
-								
-                                <p><%="info "+posts[posts.length-2].comment%></p>
-                            </div>
+                            <% if(posts.length>2){ %>
+							   <div class="caption">
+									<h4 class="pull-right"><%="price "+posts[posts.length-2].price%></h4>
+									<h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-2].topic%></a></h4>								
+									<p><%="info "+posts[posts.length-2].comment%></p>
+								</div>
+							 <% } else{ %>  
+								<div class="caption">
+									<h4 class="pull-right">no price yet</h4>
+									<h4 id="post_topic"><a href="#">"no item yet"</a></h4>								
+									<p>no information</p>
+								</div>
+							<% } %>
                             <div class="ratings">
                                 <p class="pull-right">12 reviews</p>
                                 <p>
@@ -185,13 +197,19 @@
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right"><%="price "+posts[posts.length-3].price%></h4>
-                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-3].topic%></a>
-                                </h4>
-								
-                                <p><%="info "+posts[posts.length-3].comment%></p>
-                            </div>
+							<% if(posts.length>3){ %>
+							   <div class="caption">
+									<h4 class="pull-right"><%="price "+posts[posts.length-3].price%></h4>
+									<h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-3].topic%></a></h4>								
+									<p><%="info "+posts[posts.length-3].comment%></p>
+								</div>
+							 <% } else{ %>  
+								<div class="caption">
+									<h4 class="pull-right">no price yet</h4>
+									<h4 id="post_topic"><a href="#">"no item yet"</a></h4>								
+									<p>no information</p>
+								</div>
+							<% } %>
                             <div class="ratings">
                                 <p class="pull-right">31 reviews</p>
                                 <p>
@@ -208,13 +226,19 @@
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right"><%="price "+posts[posts.length-4].price%></h4>
-                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-4].topic%></a>
-                                </h4>
-								
-                                <p><%="info "+posts[posts.length-4].comment%></p>
-                            </div>
+							<% if(posts.length>4){ %>
+							   <div class="caption">
+									<h4 class="pull-right"><%="price "+posts[posts.length-4].price%></h4>
+									<h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-4].topic%></a></h4>								
+									<p><%="info "+posts[posts.length-4].comment%></p>
+								</div>
+							 <% } else{ %>  
+								<div class="caption">
+									<h4 class="pull-right">no price yet</h4>
+									<h4 id="post_topic"><a href="#">"no item yet"</a></h4>								
+									<p>no information</p>
+								</div>
+							<% } %>
                             <div class="ratings">
                                 <p class="pull-right">6 reviews</p>
                                 <p>
@@ -231,13 +255,19 @@
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right"><%="price "+posts[posts.length-5].price%></h4>
-                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-5].topic%></a>
-                                </h4>
-								
-                                <p><%="info "+posts[posts.length-5].comment%></p>
-                            </div>
+							<% if(posts.length>5){ %>
+							   <div class="caption">
+									<h4 class="pull-right"><%="price "+posts[posts.length-5].price%></h4>
+									<h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-5].topic%></a></h4>								
+									<p><%="info "+posts[posts.length-5].comment%></p>
+								</div>
+							 <% } else{ %>  
+								<div class="caption">
+									<h4 class="pull-right">no price yet</h4>
+									<h4 id="post_topic"><a href="#">"no item yet"</a></h4>								
+									<p>no information</p>
+								</div>
+							<% } %>
                             <div class="ratings">
                                 <p class="pull-right">18 reviews</p>
                                 <p>
@@ -254,13 +284,19 @@
                    <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right"><%="price "+posts[posts.length-6].price%></h4>
-                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-6].topic%></a>
-                                </h4>
-								
-                                <p><%="info "+posts[posts.length-6].comment%></p>
-                            </div>
+							<% if(posts.length>6){ %>
+							   <div class="caption">
+									<h4 class="pull-right"><%="price "+posts[posts.length-6].price%></h4>
+									<h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-6].topic%></a></h4>								
+									<p><%="info "+posts[posts.length-6].comment%></p>
+								</div>
+							 <% } else{ %>  
+								<div class="caption">
+									<h4 class="pull-right">no price yet</h4>
+									<h4 id="post_topic"><a href="#">"no item yet"</a></h4>								
+									<p>no information</p>
+								</div>
+							<% } %>
                             <div class="ratings">
                                 <p class="pull-right">18 reviews</p>
                                 <p>
@@ -277,13 +313,19 @@
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right"><%="price "+posts[posts.length-7].price%></h4>
-                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-7].topic%></a>
-                                </h4>
-								
-                                <p><%="info "+posts[posts.length-7].comment%></p>
-                            </div>
+							<% if(posts.length>7){ %>
+							   <div class="caption">
+									<h4 class="pull-right"><%="price "+posts[posts.length-7].price%></h4>
+									<h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-7].topic%></a></h4>								
+									<p><%="info "+posts[posts.length-7].comment%></p>
+								</div>
+							 <% } else{ %>  
+								<div class="caption">
+									<h4 class="pull-right">no price yet</h4>
+									<h4 id="post_topic"><a href="#">"no item yet"</a></h4>								
+									<p>no information</p>
+								</div>
+							<% } %>
                             <div class="ratings">
                                 <p class="pull-right">18 reviews</p>
                                 <p>
@@ -300,13 +342,19 @@
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right"><%="price "+posts[posts.length-8].price%></h4>
-                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-8].topic%></a>
-                                </h4>
-								
-                                <p><%="info "+posts[posts.length-8].comment%></p>
-                            </div>
+							<% if(posts.length>8){ %>
+							   <div class="caption">
+									<h4 class="pull-right"><%="price "+posts[posts.length-8].price%></h4>
+									<h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-8].topic%></a></h4>								
+									<p><%="info "+posts[posts.length-8].comment%></p>
+								</div>
+							 <% } else{ %>  
+								<div class="caption">
+									<h4 class="pull-right">no price yet</h4>
+									<h4 id="post_topic"><a href="#">"no item yet"</a></h4>								
+									<p>no information</p>
+								</div>
+							<% } %>
                             <div class="ratings">
                                 <p class="pull-right">18 reviews</p>
                                 <p>
@@ -323,13 +371,19 @@
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right"><%="price "+posts[posts.length-9].price%></h4>
-                                <h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-9].topic%></a>
-                                </h4>
-								
-                                <p><%="info "+posts[posts.length-9].comment%></p>
-                            </div>
+							<% if(posts.length>9){ %>
+							   <div class="caption">
+									<h4 class="pull-right"><%="price "+posts[posts.length-9].price%></h4>
+									<h4 id="post_topic"><a href="#"><%="topic "+posts[posts.length-9].topic%></a></h4>								
+									<p><%="info "+posts[posts.length-9].comment%></p>
+								</div>
+							 <% } else{ %>  
+								<div class="caption">
+									<h4 class="pull-right">no price yet</h4>
+									<h4 id="post_topic"><a href="#">"no item yet"</a></h4>								
+									<p>no information</p>
+								</div>
+							<% } %>
                             <div class="ratings">
                                 <p class="pull-right">18 reviews</p>
                                 <p>

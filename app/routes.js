@@ -193,7 +193,7 @@ module.exports = function(app, passport) {
         .populate('posts')
         .exec(function (err, postArray) {
             if (err) return handleError(err);			
-            //console.log(postArray.posts[2].topic);
+            //console.log(postArray[0]);
 			    res.render('user_post.ejs', {
             user : req.user, // get the user out of session and pass to template  
 			postArray : postArray

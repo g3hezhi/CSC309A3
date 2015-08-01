@@ -86,7 +86,9 @@
 					<table>
 						<% for(var i=0; i < postArray.posts.length; i++) { %>
 						   <tr>
-							 <td><%= "Topic:"+ postArray.posts[i].topic %></td>
+							 <td><a href='/product?pid=<%= postArray.posts[i].id%>'>
+								<%= "Topic:"+ postArray.posts[i].topic %>
+							 </a></td>
 							 <td><%= "Information:"+ postArray.posts[i].comment %></td>
 							 <td><%= "Date:"+ postArray.posts[i].time %></td>
 						   </tr>

@@ -101,13 +101,13 @@ module.exports = function(app, passport) {
     // =====================================
     // PRODUCT ==============================
     // =====================================
-    // show the registration form
+    
     app.get('/product', function(req, res) {
         // render the page and pass in any flash data if it exists
         res.render('product.ejs');
     });
 
-    // process the registeration form
+
     app.post('/product', function(req, res) {
 
     });
@@ -128,15 +128,12 @@ module.exports = function(app, passport) {
 	// =====================================
     // EDIT ACCOUNT =====================
     // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/account_edit', isLoggedIn, function(req, res) {
         res.render('account_edit.ejs', {
             user : req.user // get the user out of session and pass to template
         });
     });
 	
-	// app.post('/account_edit', do all our passport stuff here);    
     app.post('/account_edit', isLoggedIn,
          function(req, res) {
             // protection against xss for security
@@ -171,19 +168,12 @@ module.exports = function(app, passport) {
                 });
             }
     });
-	app.get('/account_edit', isLoggedIn, function(req, res) {
-        res.render('account_edit.ejs', {
-			user : req.user
-             // get the user out of session and pass to template
-        });
-    });
 	app.get('/user_post', isLoggedIn, function(req, res) {
 		var thisUser=req.user;
 		User.findOne({'email': thisUser.email})
         .populate('posts')
         .exec(function (err, postArray) {
-            if (err) return handleError(err);
-			
+            if (err) return handleError(err);			
             //console.log(postArray.posts[2].topic);
 			    res.render('user_post.ejs', {
             user : req.user, // get the user out of session and pass to template  
@@ -296,14 +286,6 @@ module.exports = function(app, passport) {
     // profile gets us their basic information including their name
     // email gets their emails
     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-
-    // the callback after google has authenticated the user
-/*    app.get('/auth/google/callback',
-            passport.authenticate('google', {
-                    successRedirect : '/profile',
-                    failureRedirect : '/'
-            }));
-*/
 
     app.get('/auth/google/callback',
             passport.authenticate('google', {failureRedirect : '/'}), 

@@ -132,17 +132,39 @@ module.exports = function(app, passport) {
 			console.log(post.topic);
 			User.findOne({_id:post.writer}, function(err, user) {
 				console.log(user.username);
+				console.log(post.comments[0]);
 				res.render('product.ejs',{post: post,
 										  user: user
 					});
 				});
 	
-			});
+			
+
 		});
+	});
+	app.post('/product', function(req, res) {
+		req.sanitize('comment').escape();
+        var comment = req.body.comment;
+		
+		var pid = req.query.pid;
+		console.log(pid);	
+		Post.findOne({_id:pid}, function(err, post) {
+			//console.log(post.topic);
+			post.comments.push({text: comment, postedBy : req.user});
+			post.save(function(err, post) {
+                if (err) return console.error(err);
+                else {
+				console.log(post);
+				//res.render('profile.ejs', {
+				//	user : req.user, // get the user out of session and pass to template
+				//	post : posts
+			//	});
+				}
+            });		
+		});
+	});
 
-    app.post('/product', function(req, res) {
 
-    });
 
 
     // =====================================

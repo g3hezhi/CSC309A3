@@ -156,11 +156,8 @@ module.exports = function(app, passport) {
 			post.save(function(err, post) {
                 if (err) return console.error(err);
                 else {
-				console.log(post);
-				//res.render('profile.ejs', {
-				//	user : req.user, // get the user out of session and pass to template
-				//	post : posts
-			//	});
+				//console.log(post);
+				res.redirect('back');
 				}
             });		
 		});

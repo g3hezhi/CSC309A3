@@ -31,11 +31,24 @@ module.exports = function(app, passport) {
 	});
 
     });
+	
+	app.post('/search', function(req, res) {
+		req.sanitize('searchContent').escape();	
+        // get input from user
+        var searchContent = req.body.searchContent;
+		console.log(searchContent)
+		Post.find({topic: new RegExp(searchContent,'i')}, function(err, posts) {
+			console.log(posts);
+			res.render('product_list.ejs',{posts : posts});
+		});
+		 
+	});
     
     // process the change
     app.get('/contact', function(req, res) {
         res.render('contact.ejs'); // load the contact.ejs file
     });
+
 
 	app.get('/about', function(req, res) {
         res.render('about.ejs'); // load the about.ejs file

@@ -104,77 +104,20 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-lg-12 col-md-12">
-                        <div class="product-listing">
-							<div class="pull-right product-info-right">
-								<h5>Sold by: Username</h5>
-								<h5>Price: $$$</h5>
+                        <% for(var i=0; i < posts.length; i++) { %>
+							<div class="product-listing">
+								<div class="pull-right product-info-right">
+									<h5><%='Sold by:'+posts[i].writer %></h5>
+									<h5><%='Price:'+posts[i].price+'$'%></h5>
+								</div>
+								
+								<div class="pull-left product-info-left">
+									<h5><a href='/product?pid=<%= posts[i].id %>'><%=posts[i].topic%></a></h5>
+									<p><%=posts[i].comment%></p>
+								</div>
 							</div>
-							
-							<div class="pull-left product-info-left">
-								<h5><a href="#">Product</a></h5>
-								<p>Product InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct Information</p>
-							</div>
-                        </div>
-						
-						<div class="product-listing">
-							<div class="pull-right product-info-right">
-								<h5>Sold by: Username</h5>
-								<h5>Price: $$$</h5>
-							</div>
-							
-							<div class="pull-left product-info-left">
-								<h5><a href="#">Product</a></h5>
-								<p>Product InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct Information</p>
-							</div>
-                        </div>
-						
-						<div class="product-listing">
-							<div class="pull-right product-info-right">
-								<h5>Sold by: Username</h5>
-								<h5>Price: $$$</h5>
-							</div>
-							
-							<div class="pull-left product-info-left">
-								<h5><a href="#">Product</a></h5>
-								<p>Product InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct Information</p>
-							</div>
-                        </div>
-						
-						<div class="product-listing">
-							<div class="pull-right product-info-right">
-								<h5>Sold by: Username</h5>
-								<h5>Price: $$$</h5>
-							</div>
-							
-							<div class="pull-left product-info-left">
-								<h5><a href="#">Product</a></h5>
-								<p>Product InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct Information</p>
-							</div>
-                        </div>
-						
-						<div class="product-listing">
-							<div class="pull-right product-info-right">
-								<h5>Sold by: Username</h5>
-								<h5>Price: $$$</h5>
-							</div>
-							
-							<div class="pull-left product-info-left">
-								<h5><a href="#">Product</a></h5>
-								<p>Product InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct Information</p>
-							</div>
-                        </div>
-						
-						<div class="product-listing">
-							<div class="pull-right product-info-right">
-								<h5>Sold by: Username</h5>
-								<h5>Price: $$$</h5>
-							</div>
-							
-							<div class="pull-left product-info-left">
-								<h5><a href="#">Product</a></h5>
-								<p>Product InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct InformationProduct Information</p>
-							</div>
-                        </div>
+						<% } %>
+
 						
 						<div class="text-center">
 							<ul class="pagination">

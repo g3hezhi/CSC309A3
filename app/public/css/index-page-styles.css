@@ -32,8 +32,11 @@ body {
 }
 
 .posting-caption{
-	height: 300px;
+	width: 100%;
+	height: 100%;
     overflow: auto;
+	padding-top: 2%;
+	padding-bottom: 5%;
 }
 
 .caption h4 {
@@ -133,7 +136,7 @@ body {
 .seller-product {
   display: inline-block;
   padding: 4px;
-  width: 70%;
+  width: 100%;
   margin-bottom: 20px;
   line-height: 1.42857143;
   background-color: #fff;
@@ -177,7 +180,7 @@ body {
 }
 
 .response-box{
-	height:200px;
+	height:100%;
 	padding-top:3%;
 }
 

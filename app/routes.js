@@ -204,16 +204,64 @@ module.exports = function(app, passport) {
 	app.get('/user_inbox', isLoggedIn, function(req, res) {
 		var thisUser=req.user;
 		User.findOne({'email': thisUser.email})
-        .populate('message')
+        .populate('messages')
         .exec(function (err, msgArray) {
             if (err) return handleError(err);
-			
-            //console.log(msgArray.posts[2].topic);
-			    res.render('user_inbox.ejs', {
+            console.log(msgArray);
+			res.render('user_inbox.ejs', {
             user : req.user, // get the user out of session and pass to template  
 			msgArray : msgArray
+			});
         });
+    });
+	app.get('/user_send', isLoggedIn, function(req, res) {
+		console.log('user send work');
+		res.render('user_send.ejs', {
+            user : req.user // get the user out of session and pass to template
         });
+    });
+	app.post('/send', function(req, res) {   
+		req.sanitize('msgto').escape();
+        req.sanitize('content').escape();
+        
+		req.checkBody('msgto', 'Fill receiver').notEmpty();
+        req.checkBody('content', 'Fill content').notEmpty();
+		
+        // get input from user
+        var msgto = req.body.msgto;
+        var content = req.body.content;	
+		User.findOne({email:msgto}, function(err, receiver) {
+			if(!receiver){
+				console.log('no user found');
+				res.render('send.ejs', {message: 'No user found'});            
+			}
+			else{
+			var thisUser = req.user;    //logged in user         
+            var newMsg = new Message({
+                from: thisUser.email,
+                to: receiver.email, 
+                content: content 
+				});
+
+            // save in the db
+            newMsg.save(function(err, newMsg) {
+                if (err) return console.error(err);
+                else {            
+                    // update the user data in the USER COLLECTION
+                    receiver.messages.push(newMsg);
+                    receiver.save(function(err, receiver) {
+                        if (err) return console.error(err);
+                        else {
+							console.log(newMsg);
+							        res.render('profile.ejs', {
+											user : req.user // get the user out of session and pass to template
+									});
+                        }
+                    });
+                }
+            });
+			}
+		});
     });
 	
 	// =====================================

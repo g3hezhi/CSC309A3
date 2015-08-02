@@ -37,9 +37,11 @@ module.exports = function(app, passport) {
         // get input from user
         var searchContent = req.body.searchContent;
 		console.log(searchContent)
-		Post.find({topic: new RegExp(searchContent,'i')}, function(err, posts) {
-			console.log(posts);
-			res.render('product_list.ejs',{posts : posts});
+		Post.find({topic: new RegExp(searchContent,'i')}).populate('writer').exec(function(err, posts) {
+			//console.log(posts);
+				res.render('product_list.ejs',{posts : posts});
+		
+			
 		});
 		 
 	});
@@ -150,7 +152,7 @@ module.exports = function(app, passport) {
 		console.log(pid);	
 		Post.findOne({_id:pid}, function(err, post) {
 			//console.log(post.topic);
-			post.comments.push({text: comment, postedBy : req.user});
+			post.comments.push({text: comment, postedBy : req.user.email});
 			post.save(function(err, post) {
                 if (err) return console.error(err);
                 else {
@@ -163,6 +165,17 @@ module.exports = function(app, passport) {
             });		
 		});
 	});
+	app.get('/user_profile', function(req, res) {
+		var pid = req.query.user;
+		console.log(pid);	
+		User.findOne({email:pid}, function(err, user) {
+			//console.log(user.username);
+			 res.render('user_profile.ejs',{user : user} );	
+		});
+        // render the page and pass in any flash data if it exists
+
+	 });
+
 
 
 

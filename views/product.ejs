@@ -106,7 +106,7 @@
 						<div class="seller-profile">
 							<div class="posting-caption">
 								<h4><a href="#">Seller Name</a></h4>
-								<p><%='Seller:'+ user.username%></p>
+								<p>'Seller:'<a href="/user_profile?user=<%=user.email%>"><%=user.username%></a></p>
 
 							</div>			
 						</div>
@@ -121,7 +121,8 @@
 						<% for(var i=0; i < post.comments.length; i++) { %>
 							<div class="product-listing">
 								<div class="pull-right product-info-right">
-									<h5><%='written by:'+post.comments[i].postedBy %></h5>
+									<h5>written by:</h5>
+									<h5><a href="/user_profile?user=<%=post.comments[i].postedBy%>"><%=post.comments[i].postedBy%></a></h5>
 								</div>
 								
 								<div class="pull-left product-info-left">

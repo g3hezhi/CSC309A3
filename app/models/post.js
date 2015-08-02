@@ -17,10 +17,7 @@ var postSchema = mongoose.Schema({
         time         : {type: Date, default: Date.now },
         comments	 : [{ 
         		text: String,
-        		postedBy: {
-        			type: mongoose.Schema.Types.ObjectId,
-        			ref : "User"
-        		}
+        		postedBy: String
         }]
     
 });

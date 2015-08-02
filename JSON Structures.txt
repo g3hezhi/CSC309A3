@@ -1,3 +1,0 @@
-Structures for different JSON objects
-
-refer to app/models/FILENAME.js

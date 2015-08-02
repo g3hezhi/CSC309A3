@@ -1,6 +1,6 @@
 // app/routes.js
 var express = require('express');
-
+var util = require('util');
 var mongodb = require('mongodb');
 var csurf = require('csurf');
 var User            = require('../app/models/user');

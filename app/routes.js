@@ -31,11 +31,24 @@ module.exports = function(app, passport) {
 	});
 
     });
+	
+	app.post('/search', function(req, res) {
+		req.sanitize('searchContent').escape();	
+        // get input from user
+        var searchContent = req.body.searchContent;
+		console.log(searchContent)
+		Post.find({topic: new RegExp(searchContent,'i')}, function(err, posts) {
+			console.log(posts);
+			res.render('product_list.ejs',{posts : posts});
+		});
+		 
+	});
     
     // process the change
     app.get('/contact', function(req, res) {
         res.render('contact.ejs'); // load the contact.ejs file
     });
+
 
 	app.get('/about', function(req, res) {
         res.render('about.ejs'); // load the about.ejs file
@@ -119,17 +132,39 @@ module.exports = function(app, passport) {
 			console.log(post.topic);
 			User.findOne({_id:post.writer}, function(err, user) {
 				console.log(user.username);
+				console.log(post.comments[0]);
 				res.render('product.ejs',{post: post,
 										  user: user
 					});
 				});
 	
-			});
+			
+
 		});
+	});
+	app.post('/product', function(req, res) {
+		req.sanitize('comment').escape();
+        var comment = req.body.comment;
+		
+		var pid = req.query.pid;
+		console.log(pid);	
+		Post.findOne({_id:pid}, function(err, post) {
+			//console.log(post.topic);
+			post.comments.push({text: comment, postedBy : req.user});
+			post.save(function(err, post) {
+                if (err) return console.error(err);
+                else {
+				console.log(post);
+				//res.render('profile.ejs', {
+				//	user : req.user, // get the user out of session and pass to template
+				//	post : posts
+			//	});
+				}
+            });		
+		});
+	});
 
-    app.post('/product', function(req, res) {
 
-    });
 
 
     // =====================================

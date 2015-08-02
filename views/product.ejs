@@ -99,26 +99,16 @@
 						<input type="text" class="form-control" id="search" placeholder="What are you looking for?">
 					</div>
 					<button type="submit" class="btn btn-primary btn-responsive">Search</button>
-				</form>       
+				</form>   
 
                 <div class="row">
                     <div class="col-sm-12 col-lg-12 col-md-12">
-						<div class="seller-profile">
-							<div class="posting-caption">
-								<h4><a href="#">Seller Name</a></h4>
-								<p><%='Seller:'+ user.username%></p>
-
-							</div>			
+						<div class="posting-caption">
+							<h4><%=post.topic%></h4><br>
+							<p><%='By: ' + user.username + ' on ' + post.time%></p>							
+							<p><%='Asking Price: '+ post.price%></p>
+							<p><%=post.comment%></p>		
 						</div>
-						<div class="seller-product">
-							<div class="posting-caption">
-								<h4><a href="#">Product</a></h4>
-								<p><%='Product topic:'+ post.topic%></p>
-								<p><%='Product topic:'+ post.comment%></p>								
-								<p><%='Product date:'+ post.time%></p>
-							</div>			
-						</div>
-						
 						
 						<div class="customer-posting">
 							<div class="comment">
@@ -130,7 +120,7 @@
 							</div>
 						</div>	
                     </div>	
-                </div>
+                </div>		
             </div>
         </div>
     </div>

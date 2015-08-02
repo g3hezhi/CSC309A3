@@ -1,6 +1,6 @@
 // app/routes.js
 var express = require('express');
-var app      = express();
+var util = require('util');
 var mongodb = require('mongodb');
 var csurf = require('csurf');
 var User            = require('../app/models/user');
@@ -8,8 +8,10 @@ var Post            = require('../app/models/post');
 var Message         = require('../app/models/message');
 
 
-var csrfProtection = csurf({cookie: false});
+var csrfProtection = csurf({cookie: true});
 var mongoClient = mongodb.MongoClient;
+
+var app      = express();
 module.exports = function(app, passport) {
 
     //direct express to locate cssfiles 

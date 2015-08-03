@@ -343,7 +343,8 @@ module.exports = function(app, passport) {
     // we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/posting', isLoggedIn, function(req, res) {
         res.render('posting.ejs', {
-            user : req.user // get the user out of session and pass to template
+            user : req.user, // get the user out of session and pass to template
+			message:''
         });
     });
 
@@ -366,13 +367,13 @@ module.exports = function(app, passport) {
         var topic = req.body.topic;
         var comment = req.body.comment;
         var price = req.body.price;
-
-        var errors = req.validationErrors();
-        if(errors) {
-            res.render('post.ejs', {message: util.inspect(errors)});            
-        } else if(req.body.password != req.body.pwd_confirmation ) {
-            res.render('post.ejs', {message: 'Two passwords do not match'});            
-        } else {
+		if(category==''||item==''||topic==''||comment==''||price==''){
+			console.log('work');
+			res.render('posting.ejs', {message:'missing content'});
+			
+		}else if(isNaN(price)){
+			res.render('posting.ejs', {message:'price need to be a number'});
+		}else {
             var thisUser = req.user;    //logged in user
                     
             var newPost = new Post({

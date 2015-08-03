@@ -86,9 +86,12 @@
             <div class="col-md-8 col-md-offset-1 response-box">
 					<table>
 						<% for(var i=0; i < msgArray.messages.length; i++) { %>  
-						   <tr>
-							 <td><%= "Message:"+ msgArray.messages[i].content +" From:"+msgArray.messages[i].from %></td>
-						   </tr>
+						   	<div class="product-listing">							
+								<div class="pull-left product-info-left">
+									<h5><%='From: '+msgArray.messages[i].from %></h5>
+									<p><%='Message: '+ msgArray.messages[i].content%></p>
+								</div>
+							</div>
 						<% } %>
 					</table>
             </div>

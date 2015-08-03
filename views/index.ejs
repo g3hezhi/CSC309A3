@@ -142,11 +142,11 @@
                             <img src="http://placehold.it/320x150" alt="">
 							<% if(posts.length>i){ %>
 							   <div class="caption">
-									<h4 class="pull-right"><%="price "+posts[posts.length-1-i].price%></h4>
+									<h4 class="pull-right"><%="price: "+posts[posts.length-1-i].price+'$'%></h4>
 									<h4 id="post_topic"><a href='/product?pid=<%= posts[posts.length-1-i].id %>'>
-											<%="topic "+posts[posts.length-1-i].topic%>
+											<%=posts[posts.length-1-i].topic%>
 										</a></h4>								
-									<p><%="info "+posts[posts.length-1-i].comment%></p>
+									<p><%=posts[posts.length-1-i].comment%></p>
 								</div>
 							 <% } else{ %>  
 								<div class="caption">

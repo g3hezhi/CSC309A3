@@ -22,14 +22,15 @@ module.exports = function(app, passport) {
     // =====================================
 
     app.get('/', isLoggedIn, function(req, res) {
-	Post.find({}, function(err, posts) {
+	Post.find({}).populate('writer').exec(function (err, posts)  {
 		res.render('index.ejs', {
             user : req.user, // get the user out of session and pass to template
 			posts : posts
-        });
-	});
+			});
+		});
 
     });
+	
 	app.get('/category', function(req, res) {
 		var category =req.query.pid;
         // get input from user
@@ -170,8 +171,8 @@ module.exports = function(app, passport) {
 			for(var i=0; i<user.rating.length;i++){
 				rateSum+=user.rating[i];
 			}
-			rateSum = rateSum/user.rating.length;
-			 res.render('user_profile.ejs',{user : user , rating : rateSum} );	
+			user.averageRate = rateSum/user.rating.length;
+			 res.render('user_profile.ejs',{user : user , rating : user.averageRate} );	
 		});
 	 });
 	 
@@ -463,22 +464,24 @@ module.exports = function(app, passport) {
         res.render('admin_login', { message: req.flash('loginMessage'), csrfToken: req.csrfToken() }); 
     });
     // process the login form
-    app.post('/admin_login', csrfProtection, function(req,res){
-		req.sanitize('email').escape();
-		var email=req.body.email;
-		if(email!='admin@mail.com'){
-			res.render('admin_login', { message: 'Please use a Admin Account', csrfToken: req.csrfToken() }); 
-		}
-		else{
-			next();
-			}	
-		},passport.authenticate('local-login', {
-        successRedirect : '/admin', // redirect to the secure profile section
-        failureRedirect : '/admin_login', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash message
-		}));
+    app.post('/admin_login',csrfProtection, 
+	function(req,res){
+			req.sanitize('email').escape();
+			var email=req.body.email;
+			if(email!='admin@mail.com'){
+				res.render('admin_login', { message: 'Please use a Admin Account', csrfToken: req.csrfToken() }); 
+			}
+			else{
+				csrfProtection
+				passport.authenticate('local-login', {	
+					successRedirect : '/admin', // redirect to the secure profile section
+					failureRedirect : '/admin_login', // redirect back to the signup page if there is an error
+					failureFlash : true // allow flash message
+					});
+			}
+		});
 	
-	app.get('/admin', function(req, res) {
+	app.get('/admin', isLoggedIn,function(req, res) {
         res.render('admin.ejs'); // load the contact.ejs file
     });
 	

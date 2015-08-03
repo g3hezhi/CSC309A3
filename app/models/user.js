@@ -32,7 +32,7 @@ var userSchema = mongoose.Schema({
         name         : String
     },
     rating           : [ Number ],  // average this to get rating of a user
-
+	averageRate        : Number,
     messages : [ { type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
     posts : [ { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
 

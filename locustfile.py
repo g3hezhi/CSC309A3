@@ -7,12 +7,7 @@ class UserBehavior(TaskSet):
 
     def login(self):
         self.client.post("/login", {"username":"g3hezhi", "password":"123456","email":"hezhiweitian@gmail.com"})
-    
-    def post(self):
-        self.client.post("/posting",{"item":"PC", "topic":"test","price":"50","comment":"my test post"})
-    
-    def userinfo_edit(self):
-        self.client.post("/userinfo_edit",{"surname":"he","fname":"zhiwei"})    
+       
 
     @task(2)
     def index(self):
@@ -35,8 +30,22 @@ class UserBehavior(TaskSet):
         self.client.get("/register")
     
     @task
-    def index(self):
-        self.client.get("/index")
+    def post(self):
+        self.client.get("/posting")
+    
+    @task
+    def userinfo_edit(self):
+        self.client.get("/userinfo_edit")
+    
+    @task
+    def accountinfo_edit(self):
+        self.client.get("/account_edit")
+    @task
+    def user_inbox(self):
+        self.client.get("/user_inbox") 
+    @task
+    def user_send(self):
+        self.client.get("/user_send")     
     
     
         

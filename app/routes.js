@@ -23,7 +23,6 @@ module.exports = function(app, passport) {
 
     app.get('/', isLoggedIn, function(req, res) {
 	Post.find({}, function(err, posts) {
-		console.log(posts.length);
 		res.render('index.ejs', {
             user : req.user, // get the user out of session and pass to template
 			posts : posts
@@ -36,9 +35,7 @@ module.exports = function(app, passport) {
 		req.sanitize('searchContent').escape();	
         // get input from user
         var searchContent = req.body.searchContent;
-		console.log(searchContent)
 		Post.find({topic: new RegExp(searchContent,'i')}).populate('writer').exec(function(err, posts) {
-			//console.log(posts);
 				res.render('product_list.ejs',{posts : posts});
 		
 			
@@ -72,7 +69,7 @@ module.exports = function(app, passport) {
         res.render('login', { message: req.flash('loginMessage'), csrfToken: req.csrfToken() }); 
     });
     // process the login form
-    app.post('/login', passport.authenticate('local-login', {
+    app.post('/login', csrfProtection, passport.authenticate('local-login', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
@@ -86,13 +83,13 @@ module.exports = function(app, passport) {
     // SIGNUP ==============================
     // =====================================
     // show the registration form
-    app.get('/register', function(req, res) {
+    app.get('/register', csrfProtection, function(req, res) {
         // render the page and pass in any flash data if it exists
-        res.render('register.ejs', { message: req.flash('signupMessage') });
+        res.render('register.ejs', { message: req.flash('signupMessage'), csrfToken: req.csrfToken() });
     });
 
 
-    app.post('/register', function(req, res, next) {
+    app.post('/register', csrfProtection, function(req, res, next) {
         // prevent xss for security
         req.sanitize('username').escape();
         req.sanitize('password').escape();
@@ -115,7 +112,7 @@ module.exports = function(app, passport) {
     })
 
     // process the registeration form  
-    app.post('/register', passport.authenticate('local-signup', {
+    app.post('/register',passport.authenticate('local-signup', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/register', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
@@ -127,14 +124,10 @@ module.exports = function(app, passport) {
     // PRODUCT ==============================
     // =====================================
     
-    app.get('/product', function(req, res) {
-		var pid = req.query.pid;
-		console.log(pid);	
+    app.get('/product', isLoggedIn,function(req, res) {
+		var pid = req.query.pid;		
 		Post.findOne({_id:pid}, function(err, post) {
-			console.log(post.topic);
 			User.findOne({_id:post.writer}, function(err, user) {
-				console.log(user.username);
-				console.log(post.comments[0]);
 				res.render('product.ejs',{post: post,
 										  user: user
 					});
@@ -144,33 +137,27 @@ module.exports = function(app, passport) {
 
 		});
 	});
-	app.post('/product', function(req, res) {
+	app.post('/product', isLoggedIn,function(req, res) {
 		req.sanitize('comment').escape();
         var comment = req.body.comment;
 		
 		var pid = req.query.pid;
-		console.log(pid);	
 		Post.findOne({_id:pid}, function(err, post) {
-			//console.log(post.topic);
 			post.comments.push({text: comment, postedBy : req.user.email});
 			post.save(function(err, post) {
                 if (err) return console.error(err);
                 else {
-				//console.log(post);
 				res.redirect('back');
 				}
             });		
 		});
 	});
+
 	app.get('/user_profile', function(req, res) {
 		var pid = req.query.user;
-		console.log(pid);	
 		User.findOne({email:pid}, function(err, user) {
-			//console.log(user.username);
 			 res.render('user_profile.ejs',{user : user} );	
 		});
-        // render the page and pass in any flash data if it exists
-
 	 });
 
 
@@ -212,7 +199,6 @@ module.exports = function(app, passport) {
             var pwd_confirmation = req.body.pwd_confirmation;
             var password = req.body.password;
 
-
 			if(req.body.password != req.body.pwd_confirmation ) {
 				//res.flash('info', 'Two passwords do not match');
                 res.render('account_edit.ejs', {user:req.user, message: 'Two passwords do not match'});            
@@ -236,7 +222,6 @@ module.exports = function(app, passport) {
         .populate('posts')
         .exec(function (err, postArray) {
             if (err) return handleError(err);			
-            //console.log(postArray[0]);
 			    res.render('user_post.ejs', {
             user : req.user, // get the user out of session and pass to template  
 			postArray : postArray
@@ -252,7 +237,6 @@ module.exports = function(app, passport) {
         .populate('messages')
         .exec(function (err, msgArray) {
             if (err) return handleError(err);
-            console.log(msgArray);
 			res.render('user_inbox.ejs', {
             user : req.user, // get the user out of session and pass to template  
 			msgArray : msgArray
@@ -260,7 +244,6 @@ module.exports = function(app, passport) {
         });
     });
 	app.get('/user_send', isLoggedIn, function(req, res) {
-		console.log('user send work');
 		res.render('user_send.ejs', {
             user : req.user // get the user out of session and pass to template
         });
@@ -277,7 +260,6 @@ module.exports = function(app, passport) {
         var content = req.body.content;	
 		User.findOne({email:msgto}, function(err, receiver) {
 			if(!receiver){
-				console.log('no user found');
 				res.render('send.ejs', {message: 'No user found'});            
 			}
 			else{
@@ -297,7 +279,6 @@ module.exports = function(app, passport) {
                     receiver.save(function(err, receiver) {
                         if (err) return console.error(err);
                         else {
-							console.log(newMsg);
 							        res.render('profile.ejs', {
 											user : req.user // get the user out of session and pass to template
 									});
@@ -332,15 +313,11 @@ module.exports = function(app, passport) {
         var firstName = req.body.firstName;
         var lastName = req.body.lastName;
 		var user=req.user;
-		console.log(user.username);
-		console.log(firstName);
-		console.log(lastName);
 		user.first=firstName;
 		user.last=lastName;
 		user.save(function(err, user) {
         if (err) return console.error(err);
-         else {
-				//console.log(post);			
+         else {		
 			res.render('profile.ejs', {
 				user : req.user // get the user out of session and pass to template
 			});
@@ -405,7 +382,6 @@ module.exports = function(app, passport) {
                         if (err) return console.error(err);
                         else {
                             	Post.find({}, function(err, posts) {
-									console.log(posts.length);
 									res.render('index.ejs', {
 										user : req.user, // get the user out of session and pass to template
 										posts : posts
@@ -430,8 +406,6 @@ module.exports = function(app, passport) {
     app.get('/auth/google/callback',
             passport.authenticate('google', {failureRedirect : '/'}), 
             function(req, res) {
-                console.log("HERE");
-                //console.log(req.user);                                 
                 res.redirect('/profile');
             });
 

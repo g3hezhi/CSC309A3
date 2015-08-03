@@ -194,41 +194,39 @@ module.exports = function(app, passport) {
     // =====================================
 	app.get('/account_edit', isLoggedIn, function(req, res) {
         res.render('account_edit.ejs', {
-            user : req.user // get the user out of session and pass to template
+            user : req.user, // get the user out of session and pass to template
+			message : ''
         });
     });
 	
     app.post('/account_edit', isLoggedIn,
          function(req, res) {
             // protection against xss for security
-            req.sanitize('username').escape();
-            req.sanitize('email').escape();
+
             req.sanitize('password').escape();
             req.sanitize('pwd_confirmation').escape();
         
-            req.checkBody('email', 'Your email address is not valid').isEmail();
-            req.checkBody('username', 'Fill username').notEmpty();
             req.checkBody('password', 'Fill password').notEmpty();
             
             // get input
-            var username = req.body.username;
-            var email = req.body.email;
+            var pwd_confirmation = req.body.pwd_confirmation;
             var password = req.body.password;
 
-            var errors = req.validationErrors();
-            if(errors) {
-                res.render('account_edit.ejs', {message: util.inspect(errors)});            
-            } else if(req.body.password != req.body.pwd_confirmation ) {
-                res.render('account_edit.ejs', {message: 'Two passwords do not match'});            
+
+			if(req.body.password != req.body.pwd_confirmation ) {
+				//res.flash('info', 'Two passwords do not match');
+                res.render('account_edit.ejs', {user:req.user, message: 'Two passwords do not match'});            
             } else {
                 var thisUser = req.user;
                 thisUser.password = thisUser.generateHash(password);
-                thisUser.username = username;
-                thisUser.email = email;
                 // save the user
                 thisUser.save(function(err) {
-                    if (err)
+                    if (err){
                         throw err;
+					}else{
+						res.render('account_edit.ejs', {user:req.user,message: 'Success!'});
+					}
+						
                 });
             }
     });
@@ -340,12 +338,15 @@ module.exports = function(app, passport) {
 		user.first=firstName;
 		user.last=lastName;
 		user.save(function(err, user) {
-                if (err) return console.error(err);
-                else {
-				//console.log(post);
-				res.redirect('back');
-				}
-            });	
+        if (err) return console.error(err);
+         else {
+				//console.log(post);			
+			res.render('profile.ejs', {
+				user : req.user // get the user out of session and pass to template
+			});
+
+		}
+        });	
     });
 	
 	// =====================================

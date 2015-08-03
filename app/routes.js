@@ -421,21 +421,78 @@ module.exports = function(app, passport) {
 	// =====================================
     // ADMIN ==============================
     // =====================================
-	app.get('/admin_login', function(req, res) {
-        res.render('admin_login.ejs'); // load the contact.ejs file
+    app.get('/admin_login', csrfProtection, function(req, res) {
+        // render the page and pass in any flash data if it exists
+        res.render('admin_login', { message: req.flash('loginMessage'), csrfToken: req.csrfToken() }); 
     });
+    // process the login form
+    app.post('/admin_login', csrfProtection, passport.authenticate('local-login', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/admin_login', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
 	
 	app.get('/admin', function(req, res) {
         res.render('admin.ejs'); // load the contact.ejs file
     });
 	
 	app.get('/view_users', function(req, res) {
-        res.render('view_users.ejs'); // load the contact.ejs file
+		User.find({}, function(err, user) {
+			res.render('view_users.ejs',{user:user}); // load the contact.ejs file
+		});
+        
+    });
+	app.get('/view_posting', function(req, res) {
+		Post.find({}, function(err, post) {
+			res.render('view_posting.ejs',{post:post}); // load the contact.ejs file
+		});
+        
     });
 	
 	app.get('/modify_password', function(req, res) {
-        res.render('modify_password.ejs'); // load the contact.ejs file
+		var pid = req.query.user;
+		console.log(pid);
+		User.findOne({email:pid}, function(err, user) {
+			res.render('modify_password.ejs',{user :user,message:''});
+
+			
+		});
+         // load the contact.ejs file
     });
+	app.post('/modify_password',function(req,res){
+		    req.sanitize('userPass').escape();
+            req.sanitize('userName').escape();
+			req.sanitize('firstName').escape();
+			req.sanitize('lastName').escape();
+                   
+            // get input
+            var userPass = req.body.userPass;
+			var userName = req.body.userName;
+			var firstName = req.body.firstName;
+			var lastName = req.body.lastName;
+			var pid = req.query.user;
+			console.log(pid);
+			User.findOne({email:pid}, function(err, user) {
+				//res.render('modify_password.ejs',{user :user});
+
+				//user.password = userPass;
+				user.username = userName;
+				user.first = firstName;
+				user.last = lastName;
+                // save the user
+                user.save(function(err) {
+                    if (err){
+                        throw err;
+					}else{
+				//		console.log(userPass);
+				//		console.log(userName);
+				//		console.log(firstName);
+				//		console.log(lastName);
+						res.render('modify_password.ejs',{user :user,message:"success"});
+					}					
+                });		
+			});	
+	});
 
 };
 

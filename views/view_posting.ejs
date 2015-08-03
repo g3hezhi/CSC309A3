@@ -42,12 +42,12 @@
                 </div>  
             </div>
             <div class="col-md-8 col-md-offset-1 response-box">
-				<% for(var i=0; i < user.length; i++) { %>
+				<% for(var i=0; i < post.length; i++) { %>
 					<div class="product-listing">							
 						<div class="pull-left product-info-left">
-							<h5><a href='/modify_password?user=<%=user[i].email%>'><%= user[i].username %></a></h5>
-							<p><%= "email:"+ user[i].email%></p>
-							<p><%= "Name:"+ user[i].first+'_'+user[i].last %></p>
+							<h5><a href='/product?pid=<%=post[i].id%>'><%= post[i].topic %></a></h5>
+							<p><%= "category:"+ post[i].category%></p>
+							<p><%= "date:"+ post[i].time %></p>
 						</div>
 					</div>
 				<%}%>

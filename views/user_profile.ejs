@@ -98,15 +98,30 @@
 						</tr>
 						<tr>
 							<td>Rating:</td>
-							<td><%=user.rating%></td>
+							<td><%=rating%></td>
 						</tr>
                     </tbody>
                 </table>
+				<form role="form" action="#" method="post">
+						<div class="form-group">
+							<label for="posting-category">Rate this user</label><br>
+								<select class="form-control" id="posting-category" name="category">
+									<option></option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+								</select>
+						</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+				</form>
             </div>
-            <p>Register with:</p>
-
-            <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
-
         </div>  
     </div>
  

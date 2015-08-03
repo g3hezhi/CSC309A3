@@ -165,8 +165,30 @@ module.exports = function(app, passport) {
 
 	app.get('/user_profile', function(req, res) {
 		var pid = req.query.user;
+		var rateSum = 0;
 		User.findOne({email:pid}, function(err, user) {
-			 res.render('user_profile.ejs',{user : user} );	
+			for(var i=0; i<user.rating.length;i++){
+				rateSum+=user.rating[i];
+			}
+			rateSum = rateSum/user.rating.length;
+			 res.render('user_profile.ejs',{user : user , rating : rateSum} );	
+		});
+	 });
+	 
+	 app.post('/user_profile', function(req, res) {
+		var pid = req.query.user;
+		var rate = req.body.category;
+		User.findOne({email:pid}, function(err, user) {
+			console.log(rate);
+			console.log(user.username);
+			user.rating.push(rate);
+			user.save(function(err,user){
+				if (err) return console.error(err);
+                else {
+				res.redirect('back');
+				}
+			});
+			 
 		});
 	 });
 
@@ -315,16 +337,20 @@ module.exports = function(app, passport) {
     app.post('/userinfo_edit', function(req, res) {
 		req.sanitize('firstName').escape();
         req.sanitize('lastName').escape();
-        
+        req.sanitize('age').escape();
+		
 		req.checkBody('firstName', 'Fill First Name').notEmpty();
         req.checkBody('lastName', 'Fill Last Name').notEmpty();
+		req.checkBody('age', 'Fill age').notEmpty();
 		
         // get input from user
         var firstName = req.body.firstName;
         var lastName = req.body.lastName;
+		var age = req.body.age;
 		var user=req.user;
 		user.first=firstName;
 		user.last=lastName;
+		user.age=age;
 		user.save(function(err, user) {
         if (err) return console.error(err);
          else {		

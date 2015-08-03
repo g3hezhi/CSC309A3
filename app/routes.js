@@ -424,6 +424,24 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 
+	// =====================================
+    // ADMIN ==============================
+    // =====================================
+	app.get('/admin_login', function(req, res) {
+        res.render('admin_login.ejs'); // load the contact.ejs file
+    });
+	
+	app.get('/admin', function(req, res) {
+        res.render('admin.ejs'); // load the contact.ejs file
+    });
+	
+	app.get('/view_users', function(req, res) {
+        res.render('view_users.ejs'); // load the contact.ejs file
+    });
+	
+	app.get('/modify_password', function(req, res) {
+        res.render('modify_password.ejs'); // load the contact.ejs file
+    });
 
 };
 

@@ -13,8 +13,9 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/sticky-footer.css" rel="stylesheet">
-
+	<link href="css/sticky-footer.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+    <script src="js/register.js"></script>
     <!-- Custom CSS -->
     <link href="css/index-page-styles.css" rel="stylesheet">
 
@@ -39,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Exgames</a>
+                <a class="navbar-brand" href="/">EXgames</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -67,11 +68,11 @@
         </div>
         <!-- /.container -->
     </nav>
-    
+	
     <!-- Page Content -->
-    <div class="container"> 
+    <div class="container">	
         <div class="row">
-            <div class="col-md-3">      
+            <div class="col-md-3">     
                 <p class="lead"><%= "Hi,"+  user.username %></p>
 				<img class="logo" src="images/default_profile.png" alt="">
                 <div class="list-group">
@@ -83,26 +84,29 @@
 					<a href="/user_send" class="list-group-item">send message</a>
                 </div>  
             </div>
-            <div class="col-md-8 col-md-offset-1 response-box">
-                <form role="form" action="/profile" method="post">
-                    <div class="form-group">    
-                        <label for="fname">First Name</label>
-                        <input type="text" class="form-control" id="fname">
-                    </div>
-                    <div class="form-group">    
-                        <label for="surname">Surname</label>
-                        <input type="text" class="form-control" id="surname">
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="b_submit">Submit</button>
-              </form>
+
+			<div class="col-md-8 col-md-offset-1 response-box">
+						<form role="form" action="/userinfo_edit" method="post">
+							<div class="form-group">
+								<label for="contact-topic">First Name</label>
+								<input type="text" class="form-control" name="firstName"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="contact-subject">Last Name</label>
+								<input type="text" class="form-control" name="lastName"></textarea>
+							</div>
+						  <button type="submit" class="btn btn-default">Submit</button>
+						</form>
+                    </div>	
+                </div>
             </div>
-        </div>  
+        </div>
     </div>
- 
+	
 
 	<footer class="footer">
       <div class="container">
-        <p class="text-muted">Copyright &copy; 2015 - All Rights Reserved - CompanyNameHere</p>
+        <p class="text-muted">Copyright &copy; 2015 - All Rights Reserved - EXgames</p>
       </div>
     </footer>
 

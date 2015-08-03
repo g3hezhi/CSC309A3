@@ -323,11 +323,30 @@ module.exports = function(app, passport) {
     });
 	
 	// process the change
-    app.post('/userinfo_edit', passport.authenticate('local-signup', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/userinfo_edit', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+    app.post('/userinfo_edit', function(req, res) {
+		req.sanitize('firstName').escape();
+        req.sanitize('lastName').escape();
+        
+		req.checkBody('firstName', 'Fill First Name').notEmpty();
+        req.checkBody('lastName', 'Fill Last Name').notEmpty();
+		
+        // get input from user
+        var firstName = req.body.firstName;
+        var lastName = req.body.lastName;
+		var user=req.user;
+		console.log(user.username);
+		console.log(firstName);
+		console.log(lastName);
+		user.first=firstName;
+		user.last=lastName;
+		user.save(function(err, user) {
+                if (err) return console.error(err);
+                else {
+				//console.log(post);
+				res.redirect('back');
+				}
+            });	
+    });
 	
 	// =====================================
     // POSTING =====================

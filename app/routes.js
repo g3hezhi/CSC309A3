@@ -30,6 +30,16 @@ module.exports = function(app, passport) {
 	});
 
     });
+	app.get('/category', function(req, res) {
+		var category =req.query.pid;
+        // get input from user
+		Post.find({category: new RegExp(category,'i')}).populate('writer').exec(function(err, posts) {
+				res.render('product_list.ejs',{posts : posts});
+		
+			
+		});
+		 
+	});
 	
 	app.post('/search', function(req, res) {
 		req.sanitize('searchContent').escape();	

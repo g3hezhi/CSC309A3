@@ -44,7 +44,7 @@ describe('PAGES WITHOUT CSRF', function() {
 
 	it('about', function(done) {
 		request('http://localhost:3000')
-			.get('/contact')
+			.get('/about')
 			.expect(200, done)
 	});
 
@@ -54,7 +54,7 @@ describe('PAGES WITHOUT CSRF', function() {
 			.expect(200, done)
 	});
 
-	it('category', function(done) {
+	it('search', function(done) {
 		request('http://localhost:3000')
 			.post('/search')
 			.send({ searchContent: 'PS4'})

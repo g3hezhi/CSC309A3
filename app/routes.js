@@ -180,8 +180,6 @@ module.exports = function(app, passport) {
 		var pid = req.query.user;
 		var rate = req.body.category;
 		User.findOne({email:pid}, function(err, user) {
-			console.log(rate);
-			console.log(user.username);
 			user.rating.push(rate);
 			user.save(function(err,user){
 				if (err) return console.error(err);
@@ -395,7 +393,6 @@ module.exports = function(app, passport) {
         var comment = req.body.comment;
         var price = req.body.price;
 		if(category==''||item==''||topic==''||comment==''||price==''){
-			console.log('work');
 			res.render('posting.ejs', {message:'missing content'});
 			
 		}else if(isNaN(price)){
@@ -491,7 +488,6 @@ module.exports = function(app, passport) {
 	
 	app.get('/modify_password', function(req, res) {
 		var pid = req.query.user;
-		console.log(pid);
 		User.findOne({email:pid}, function(err, user) {
 			res.render('modify_password.ejs',{user :user,message:''});
 
@@ -511,10 +507,12 @@ module.exports = function(app, passport) {
 			var firstName = req.body.firstName;
 			var lastName = req.body.lastName;
 			var pid = req.query.user;
-			console.log(pid);
+
 			User.findOne({email:pid}, function(err, user) {
 				//res.render('modify_password.ejs',{user :user});
-
+				if(userPass==''||userName==''||firstName==''||lastName==''){
+					res.render('modify_password.ejs',{user :user,message:"Can not be blank"});
+				}else{
 				user.password = user.generateHash(userPass);
 				user.username = userName;
 				user.first = firstName;
@@ -524,14 +522,13 @@ module.exports = function(app, passport) {
                     if (err){
                         throw err;
 					}else{
-				//		console.log(userPass);
-				//		console.log(userName);
-				//		console.log(firstName);
-				//		console.log(lastName);
+
 						res.render('modify_password.ejs',{user :user,message:"success"});
-					}					
-                });		
+						}					
+					});
+				}
 			});	
+		
 	});
 
 };

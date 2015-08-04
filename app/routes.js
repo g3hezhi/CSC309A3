@@ -276,7 +276,8 @@ module.exports = function(app, passport) {
     });
 	app.get('/user_send', isLoggedIn, function(req, res) {
 		res.render('user_send.ejs', {
-            user : req.user // get the user out of session and pass to template
+            user : req.user, // get the user out of session and pass to template
+			message: ''
         });
     });
 	app.post('/send', function(req, res) {   
@@ -291,7 +292,10 @@ module.exports = function(app, passport) {
         var content = req.body.content;	
 		User.findOne({email:msgto}, function(err, receiver) {
 			if(!receiver){
-				res.render('send.ejs', {message: 'No user found'});            
+				res.render('user_send.ejs', {user:req.user,message: 'No user found'});            
+			}
+			else if(content==''){
+				res.render('user_send.ejs', {user:req.user,message: 'please say something'}); 
 			}
 			else{
 			var thisUser = req.user;    //logged in user         
